@@ -37,6 +37,23 @@ Le CLI Angular ne lit que **`postcss.config.json`** (pas `postcss.config.mjs`). 
 - **`/admin/login`** : maquette du futur espace admin (sans auth réelle).
 - **Chat flottant** en bas à gauche (UI + dialogue ; envoi désactivé jusqu’au backend).
 
+## Déploiement Render (site statique)
+
+Angular **21** exige **Node ≥ 20.19** (voir `engines` dans `frontend/package.json`). Sans la bonne version, le build échoue avec le code de sortie `1`.
+
+| Réglage | Valeur |
+|--------|--------|
+| **Root Directory** | `frontend` |
+| **Build Command** | `npm ci && npm run build` |
+| **Publish Directory** | `dist/frontend/browser` |
+
+Si la **Root Directory** est vide (racine du repo), utilisez plutôt :  
+**Build** `cd frontend && npm ci && npm run build` et **Publish** `frontend/dist/frontend/browser`.
+
+Variable d’environnement recommandée : `NODE_VERSION` = `22.12.0` (ou un fichier `frontend/.nvmrc` déjà présent).
+
+Réécritures SPA : règle **Rewrite** `/*` → `/index.html` (voir `render.yaml` à la racine du repo).
+
 ## Prochaines étapes suggérées
 
 1. Module Spring Boot (JWT, CORS, PostgreSQL).
