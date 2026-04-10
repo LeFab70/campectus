@@ -1,0 +1,341 @@
+<section
+  class="relative flex min-h-[min(72vh,560px)] items-center overflow-hidden px-4 py-16 text-white md:min-h-[min(78vh,640px)] md:py-24"
+>
+  <img
+    [src]="heroBanner.url"
+    [alt]="heroBanner.alt"
+    width="1920"
+    height="1080"
+    fetchpriority="high"
+    decoding="async"
+    referrerpolicy="no-referrer"
+    class="absolute inset-0 h-full w-full object-cover"
+  />
+  <div
+    class="absolute inset-0 bg-gradient-to-br from-teal-950/88 via-teal-900/72 to-[var(--ce-forest)]/78"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="pointer-events-none absolute -right-24 top-10 h-72 w-72 rounded-full bg-[var(--ce-sun)]/15 blur-3xl ce-animate-float"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="pointer-events-none absolute -left-20 bottom-0 h-64 w-64 rounded-full bg-[var(--ce-sky)]/20 blur-3xl ce-animate-float"
+    style="animation-delay: 1.2s"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative z-10 mx-auto w-full max-w-6xl">
+    <p-tag
+      value="Depuis 1961"
+      severity="warn"
+      styleClass="!bg-[var(--ce-sun)]/25 !text-white !border-[var(--ce-sun)]/40 ce-hero-line ce-delay-1"
+    />
+    <h1 class="font-display ce-hero-line ce-delay-2 mt-4 max-w-3xl text-4xl font-bold leading-tight tracking-tight md:text-5xl">
+      Le Camp Ectus, au cœur de l’Acadie
+    </h1>
+    <p class="ce-hero-line ce-delay-3 mt-6 max-w-2xl text-lg text-white/90">
+      Plus de 30 000 campeurs et campeuses, des centaines d’étudiants employés, et une communauté de bénévoles qui font
+      vivre un camp unique sur la baie des Chaleurs.
+    </p>
+    <div class="ce-hero-line ce-delay-4 mt-10 flex flex-wrap gap-3">
+      <p-button
+        label="Faire un don"
+        icon="pi pi-heart-fill"
+        severity="warn"
+        styleClass="!font-semibold !shadow-lg"
+        (onClick)="navigate('/financement', { don: '1' })"
+      />
+      <p-button
+        label="Campagne de financement"
+        icon="pi pi-chart-line"
+        (onClick)="navigate('/financement')"
+      />
+      <p-button
+        label="Voir les emplois"
+        icon="pi pi-briefcase"
+        severity="secondary"
+        [outlined]="true"
+        styleClass="!text-white !border-white/50 hover:!bg-white/10"
+        (onClick)="navigate('/emploi')"
+      />
+    </div>
+  </div>
+</section>
+
+<section class="mx-auto max-w-6xl px-4 py-16">
+  <h2 class="font-display ce-animate-fade-up text-center text-3xl font-bold text-[var(--ce-ocean)]">En résumé</h2>
+  <div class="ce-title-accent ce-delay-1 mx-auto" aria-hidden="true"></div>
+  <p class="ce-animate-fade-up ce-delay-2 mx-auto mt-2 max-w-3xl text-center text-[var(--ce-text-muted)]">
+    Le Camp Ectus est affilié à l’Association de camping du N.-B. Il témoigne du dynamisme de la communauté grâce au
+    travail des bénévoles, des organismes et de toutes les familles impliquées.
+  </p>
+
+  <div
+    class="ce-animate-fade-up ce-delay-2 mx-auto mt-8 flex flex-wrap items-stretch justify-center gap-4 sm:gap-6"
+    aria-hidden="true"
+  >
+    @for (p of summaryIntroPillars; track p.label) {
+      <div
+        class="flex min-w-[5.5rem] flex-col items-center gap-2 rounded-[var(--ce-radius-lg)] border border-teal-900/10 bg-teal-50/60 px-4 py-3 text-center shadow-sm"
+      >
+        <div
+          class="ce-summary-pillar-icon flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-teal-700/12 to-teal-900/8 text-lg text-teal-800"
+        >
+          <i [class]="p.icon"></i>
+        </div>
+        <span class="text-xs font-semibold uppercase tracking-wide text-teal-900/80">{{ p.label }}</span>
+      </div>
+    }
+  </div>
+
+  <div class="mt-12 grid gap-6 md:grid-cols-2">
+    @for (h of highlights(); track h.title; let i = $index) {
+      <p-card
+        [style.animation-delay.ms]="280 + i * 140"
+        styleClass="ce-highlight-enter ce-highlight-card h-full overflow-hidden shadow-[var(--ce-shadow-soft)]"
+      >
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-start">
+          <div
+            class="ce-highlight-icon mx-auto flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-700/12 to-teal-900/8 text-2xl text-teal-800 sm:mx-0"
+            aria-hidden="true"
+          >
+            <i [class]="h.icon"></i>
+          </div>
+          <div class="min-w-0 flex-1 text-center sm:text-left">
+            <h3 class="font-display m-0 text-lg font-semibold text-[var(--ce-ocean)]">{{ h.title }}</h3>
+            <p class="mt-2 m-0 text-[var(--ce-text-muted)] leading-relaxed">{{ h.text }}</p>
+          </div>
+        </div>
+      </p-card>
+    }
+  </div>
+</section>
+
+<section
+  class="border-y border-amber-400/30 bg-gradient-to-br from-teal-900 via-teal-800 to-[var(--ce-forest)] px-4 py-12 text-white"
+  aria-labelledby="ce-home-donate-heading"
+>
+  <div class="mx-auto flex max-w-6xl flex-col items-center gap-6 md:flex-row md:items-center md:justify-between">
+    <div class="max-w-2xl text-center md:text-left">
+      <p-tag
+        value="Soutien"
+        severity="warn"
+        styleClass="!border-[var(--ce-sun)]/50 !bg-[var(--ce-sun)]/20 !text-white"
+      />
+      <h2 id="ce-home-donate-heading" class="font-display mt-3 text-2xl font-bold leading-tight md:text-3xl">
+        Chaque don finance bourses, équipement et l’accueil des familles
+      </h2>
+      <p class="mt-3 m-0 text-sm leading-relaxed text-white/90 md:text-base">
+        En quelques minutes, vous pouvez simuler un don sécurisé (démo) ou voir l’avancement de la campagne. Votre geste
+        compte pour la prochaine génération de campeurs et campeuses.
+      </p>
+    </div>
+    <div class="flex w-full max-w-sm flex-col gap-2 sm:max-w-xs">
+      <p-button
+        label="Faire un don maintenant"
+        icon="pi pi-heart-fill"
+        severity="warn"
+        styleClass="w-full !font-semibold !py-3"
+        (onClick)="navigate('/financement', { don: '1' })"
+      />
+      <p-button
+        label="Voir la campagne"
+        icon="pi pi-arrow-right"
+        iconPos="right"
+        severity="secondary"
+        [outlined]="true"
+        styleClass="w-full !text-white !border-white/45 hover:!bg-white/10"
+        (onClick)="navigate('/financement')"
+      />
+    </div>
+  </div>
+</section>
+
+<section
+  #statsSection
+  id="chiffres-cles"
+  class="border-y border-teal-900/10 bg-[var(--ce-sand)]/60 px-4 py-16"
+>
+  <div class="mx-auto max-w-6xl">
+    <h2 class="font-display ce-animate-fade-up text-center text-3xl font-bold text-[var(--ce-ocean)]">
+      Le Camp Ectus, c’est…
+    </h2>
+    <div class="ce-title-accent ce-delay-1 mx-auto" aria-hidden="true"></div>
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      @for (m of statModels; track m.label; let i = $index) {
+        <div
+          class="ce-stat-card flex flex-col items-center rounded-[var(--ce-radius-xl)] border border-teal-900/10 bg-[var(--ce-card)] p-6 text-center shadow-[var(--ce-shadow-soft)] transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg"
+          [style.animation-delay.ms]="i * 100"
+        >
+          <div
+            class="ce-stat-icon mb-4 flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-700/12 to-teal-900/8 text-2xl text-teal-800"
+            aria-hidden="true"
+          >
+            <i [class]="m.icon"></i>
+          </div>
+          <p
+            class="font-display ce-stat-value m-0 text-3xl font-bold text-[var(--ce-ocean-light)] tabular-nums tracking-tight"
+          >
+            {{ formatStat(i) }}
+          </p>
+          <p class="mt-2 m-0 text-sm leading-snug text-[var(--ce-text-muted)]">{{ m.label }}</p>
+        </div>
+      }
+    </div>
+  </div>
+  <div class="mx-auto mt-10 max-w-3xl rounded-[var(--ce-radius-xl)] border border-teal-800/15 bg-teal-50/80 px-5 py-5 text-center shadow-sm">
+    <p class="m-0 text-sm font-medium text-[var(--ce-ocean)]">
+      Un petit geste aujourd’hui, un grand sourire demain sur la baie des Chaleurs.
+    </p>
+    <p-button
+      class="mt-4 inline-flex"
+      label="Soutenir le camp — Faire un don"
+      icon="pi pi-heart"
+      severity="warn"
+      [outlined]="true"
+      (onClick)="navigate('/financement', { don: '1' })"
+    />
+  </div>
+</section>
+
+<section class="mx-auto max-w-6xl px-4 py-12">
+  <app-newsletter-signup variant="light" />
+</section>
+
+<section
+  class="ce-partners-section border-y border-teal-900/10 bg-gradient-to-b from-teal-50/70 via-[var(--ce-sand)]/45 to-[var(--ce-card)] py-14"
+  aria-labelledby="ce-home-partners-heading"
+>
+  <div class="mx-auto max-w-6xl px-4 text-center">
+    <h2 id="ce-home-partners-heading" class="font-display text-2xl font-bold tracking-tight text-[var(--ce-ocean)] md:text-3xl">
+      Partenaires & commandites
+    </h2>
+    <p class="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-[var(--ce-text-muted)] md:text-base">
+      Merci aux partenaires or, argent, bronze et amis du camp. Utilisez les flèches pour parcourir les groupes (environ
+      quatre partenaires par écran sur grand format ; deux colonnes sur mobile).
+    </p>
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+      <p-button
+        label="Faire un don"
+        icon="pi pi-heart-fill"
+        severity="warn"
+        (onClick)="navigate('/financement', { don: '1' })"
+      />
+      <p-button
+        label="Nous contacter"
+        icon="pi pi-envelope"
+        severity="secondary"
+        [outlined]="true"
+        (onClick)="navigate('/contact')"
+      />
+    </div>
+  </div>
+
+  <div
+    class="mx-auto mt-10 max-w-6xl px-4"
+    role="region"
+    aria-roledescription="carousel"
+    [attr.aria-label]="'Partenaires — ' + partnerSlideLabel()"
+  >
+    <p class="sr-only" aria-live="polite">{{ partnerSlideLabel() }}</p>
+    <div class="flex flex-col items-stretch gap-6 sm:flex-row sm:items-center sm:gap-4">
+      <p-button
+        icon="pi pi-chevron-left"
+        [rounded]="true"
+        severity="secondary"
+        [outlined]="true"
+        [disabled]="partnerAtStart()"
+        styleClass="ce-partners-arrow hidden shrink-0 sm:inline-flex"
+        [attr.aria-label]="'Partenaires précédents'"
+        (onClick)="partnersPrev()"
+      />
+      <div class="min-w-0 flex-1">
+        <div
+          class="mx-auto grid max-w-5xl grid-cols-2 justify-items-center gap-x-4 gap-y-8 sm:gap-x-6 lg:grid-cols-4 lg:gap-x-8"
+        >
+          @for (p of currentPartnerChunk(); track p.id) {
+            <div class="flex w-full max-w-[9.5rem] flex-col items-center sm:max-w-[10.5rem]">
+              <div
+                class="ce-partner-bubble flex h-[4.75rem] w-[4.75rem] shrink-0 items-center justify-center overflow-hidden rounded-full border border-teal-900/12 bg-white text-center shadow-[var(--ce-shadow-soft)] sm:h-[5.25rem] sm:w-[5.25rem]"
+                [attr.data-tier]="p.tier"
+              >
+                @if (p.logoUrl) {
+                  <img
+                    [src]="p.logoUrl"
+                    [alt]="''"
+                    class="h-full w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                } @else {
+                  <span
+                    class="block max-w-[4.25rem] px-1 text-[0.6rem] font-bold leading-tight text-teal-900 sm:max-w-[4.75rem] sm:text-[0.65rem]"
+                    >{{ p.shortLabel }}</span
+                  >
+                }
+              </div>
+              <span class="mt-2 line-clamp-4 text-center text-[0.65rem] font-medium leading-snug text-[var(--ce-text)] sm:text-xs">
+                {{ p.name }}
+              </span>
+            </div>
+          }
+        </div>
+      </div>
+      <p-button
+        icon="pi pi-chevron-right"
+        [rounded]="true"
+        severity="secondary"
+        [outlined]="true"
+        [disabled]="partnerAtEnd()"
+        styleClass="ce-partners-arrow hidden shrink-0 sm:inline-flex"
+        [attr.aria-label]="'Partenaires suivants'"
+        (onClick)="partnersNext()"
+      />
+    </div>
+    <div class="mt-6 flex justify-center gap-6 sm:hidden">
+      <p-button
+        icon="pi pi-chevron-left"
+        [rounded]="true"
+        severity="secondary"
+        [outlined]="true"
+        [disabled]="partnerAtStart()"
+        [attr.aria-label]="'Partenaires précédents'"
+        (onClick)="partnersPrev()"
+      />
+      <p-button
+        icon="pi pi-chevron-right"
+        [rounded]="true"
+        severity="secondary"
+        [outlined]="true"
+        [disabled]="partnerAtEnd()"
+        [attr.aria-label]="'Partenaires suivants'"
+        (onClick)="partnersNext()"
+      />
+    </div>
+    <p class="mt-4 text-center text-xs text-[var(--ce-text-muted)]">{{ partnerSlideLabel() }}</p>
+  </div>
+
+  <div class="mx-auto mt-8 max-w-3xl px-4 text-center">
+    <p class="m-0 text-xs text-[var(--ce-text-muted)]">
+      Référence visuelle (capture du site) :
+      <a
+        class="font-medium text-teal-800 underline-offset-2 hover:underline"
+        [href]="partnersReferenceImage"
+        target="_blank"
+        rel="noopener noreferrer"
+        >ouvrir l’image</a
+      >
+    </p>
+  </div>
+</section>
+
+<a
+  routerLink="/financement"
+  [queryParams]="{ don: '1' }"
+  class="ce-home-donate-pill"
+  aria-label="Faire un don au Camp Ectus — ouvre le formulaire sur la page financement"
+>
+  <i class="pi pi-heart-fill" aria-hidden="true"></i>
+  <span>Faire un don</span>
+</a>

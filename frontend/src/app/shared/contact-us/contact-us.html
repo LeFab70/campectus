@@ -1,0 +1,137 @@
+<p-card header="Contactez-nous" styleClass="shadow-[var(--ce-shadow-soft)] overflow-hidden">
+  <div class="space-y-5">
+    <div class="rounded-lg border border-teal-900/10 bg-teal-50/40 p-4 text-sm text-[var(--ce-text-muted)]">
+      <p class="m-0 flex items-start gap-2">
+        <i class="pi pi-phone mt-0.5 text-teal-800" aria-hidden="true"></i>
+        <span><strong>Téléphone :</strong> (506) 783-2894</span>
+      </p>
+      <p class="m-0 mt-2 flex items-start gap-2">
+        <i class="pi pi-envelope mt-0.5 text-teal-800" aria-hidden="true"></i>
+        <span><strong>Courriel :</strong> campectus@gmail.com</span>
+      </p>
+      <p class="m-0 mt-2 flex items-start gap-2">
+        <i class="pi pi-map-marker mt-0.5 text-teal-800" aria-hidden="true"></i>
+        <span><strong>Lieu :</strong> Petit-Rocher, Nouveau-Brunswick</span>
+      </p>
+    </div>
+
+    <div>
+      <p class="m-0 text-sm font-semibold text-[var(--ce-ocean)]">
+        Horaires d’ouverture <span class="text-xs font-normal text-[var(--ce-text-muted)]">(démo)</span>
+      </p>
+      <ul class="mt-3 m-0 list-none space-y-2 p-0 text-sm text-[var(--ce-text-muted)]">
+        @for (h of hours; track h.label) {
+          <li class="flex items-start justify-between gap-3 border-b border-teal-900/10 pb-2 last:border-0 last:pb-0">
+            <span class="font-medium text-[var(--ce-text)]">{{ h.label }}</span>
+            <span class="whitespace-nowrap">{{ h.value }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <form class="space-y-3" (submit)="$event.preventDefault(); submit()">
+      <div class="grid gap-3 sm:grid-cols-2">
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-semibold uppercase tracking-wide text-teal-800/75" for="ce-contact-name"
+            >Nom complet</label
+          >
+          <input
+            pInputText
+            id="ce-contact-name"
+            name="contact-name"
+            class="w-full"
+            autocomplete="name"
+            [ngModel]="fullName()"
+            (ngModelChange)="fullName.set($event); feedback.set('idle')"
+          />
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-semibold uppercase tracking-wide text-teal-800/75" for="ce-contact-email"
+            >Courriel</label
+          >
+          <input
+            pInputText
+            id="ce-contact-email"
+            name="contact-email"
+            type="email"
+            class="w-full"
+            autocomplete="email"
+            placeholder="votre@courriel.ca"
+            [ngModel]="email()"
+            (ngModelChange)="email.set($event); feedback.set('idle')"
+          />
+        </div>
+      </div>
+      <div class="grid gap-3 sm:grid-cols-2">
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-semibold uppercase tracking-wide text-teal-800/75" for="ce-contact-phone"
+            >Téléphone (optionnel)</label
+          >
+          <input
+            pInputText
+            id="ce-contact-phone"
+            name="contact-phone"
+            class="w-full"
+            inputmode="tel"
+            autocomplete="tel"
+            placeholder="(506) 000-0000"
+            [ngModel]="phone()"
+            (ngModelChange)="phone.set($event); feedback.set('idle')"
+          />
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-semibold uppercase tracking-wide text-teal-800/75" for="ce-contact-subject"
+            >Sujet</label
+          >
+          <input
+            pInputText
+            id="ce-contact-subject"
+            name="contact-subject"
+            class="w-full"
+            placeholder="ex. Inscription, bénévolat…"
+            [ngModel]="subject()"
+            (ngModelChange)="subject.set($event); feedback.set('idle')"
+          />
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label class="text-xs font-semibold uppercase tracking-wide text-teal-800/75" for="ce-contact-message"
+          >Message</label
+        >
+        <textarea
+          pTextarea
+          id="ce-contact-message"
+          name="contact-message"
+          rows="4"
+          class="w-full"
+          placeholder="Écrivez votre message…"
+          [ngModel]="message()"
+          (ngModelChange)="message.set($event); feedback.set('idle')"
+        ></textarea>
+      </div>
+
+      @if (feedback() === 'ok') {
+        <p-message
+          severity="success"
+          styleClass="w-full"
+          [closable]="true"
+          text="Message envoyé (démo). En production, ceci enverrait un courriel et créerait un ticket."
+          (onClose)="feedback.set('idle')"
+        />
+      }
+      @if (feedback() === 'err') {
+        <p-message
+          severity="error"
+          styleClass="w-full"
+          [closable]="true"
+          [text]="errorText() ?? 'Veuillez vérifier les champs.'"
+          (onClose)="feedback.set('idle')"
+        />
+      }
+
+      <p-button type="submit" label="Envoyer" icon="pi pi-send" styleClass="w-full !font-semibold" />
+    </form>
+  </div>
+</p-card>
+

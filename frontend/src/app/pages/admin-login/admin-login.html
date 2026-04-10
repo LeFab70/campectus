@@ -1,0 +1,44 @@
+<div
+  class="flex min-h-dvh flex-col items-center justify-center bg-gradient-to-br from-teal-950 via-teal-900 to-[var(--ce-forest)] px-4 py-12"
+>
+  <a
+    routerLink="/"
+    class="mb-8 font-display text-xl font-semibold text-white/90 no-underline transition hover:text-white"
+  >
+    ← Retour au site
+  </a>
+
+  <p-card styleClass="w-full max-w-md shadow-[var(--ce-shadow-soft)]" header="Espace administration">
+    <p class="mt-0 text-sm text-[var(--ce-text-muted)]">
+      Formulaire de démonstration — authentification à brancher sur Spring Boot + PostgreSQL.
+    </p>
+    <div class="mt-6 flex flex-col gap-4">
+      <div class="flex flex-col gap-2">
+        <label for="admin-email" class="text-sm font-medium text-[var(--ce-text)]">Courriel</label>
+        <input
+          pInputText
+          id="admin-email"
+          type="email"
+          autocomplete="username"
+          class="w-full"
+          [ngModel]="email()"
+          (ngModelChange)="email.set($event)"
+        />
+      </div>
+      <div class="flex flex-col gap-2">
+        <label for="admin-password" class="text-sm font-medium text-[var(--ce-text)]">Mot de passe</label>
+        <p-password
+          inputId="admin-password"
+          styleClass="w-full"
+          [inputStyle]="{ width: '100%' }"
+          [toggleMask]="true"
+          [feedback]="false"
+          autocomplete="current-password"
+          [ngModel]="password()"
+          (ngModelChange)="password.set($event)"
+        />
+      </div>
+      <p-button label="Se connecter" icon="pi pi-sign-in" styleClass="w-full" fluid (onClick)="submit()" />
+    </div>
+  </p-card>
+</div>

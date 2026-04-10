@@ -1,0 +1,85 @@
+<div
+  class="ce-newsletter rounded-[var(--ce-radius-xl)] border px-4 py-5 sm:px-5"
+  [class.ce-newsletter--dark]="variant() === 'dark'"
+  [class.ce-newsletter--light]="variant() === 'light'"
+  [class.ce-newsletter--stacked]="layout() === 'stacked'"
+>
+  @if (layout() === 'stacked') {
+    <div class="flex flex-col gap-5">
+      <div class="flex flex-col items-center gap-4 sm:flex-row sm:items-start sm:text-left">
+        <div class="ce-newsletter__icon flex h-12 w-12 shrink-0 items-center justify-center rounded-xl" aria-hidden="true">
+          <i class="pi pi-envelope text-xl"></i>
+        </div>
+        <div class="min-w-0 flex-1 text-center sm:text-left">
+          <h2 class="font-display m-0 text-lg font-bold sm:text-xl">Infolettre du Camp Ectus</h2>
+          <p class="mt-1 m-0 max-w-2xl text-sm leading-relaxed opacity-90">
+            Recevez les dates d’inscription, les nouvelles du camp et les appels de bénévoles (démo : aucun courriel n’est
+            envoyé).
+          </p>
+        </div>
+      </div>
+      <form class="flex w-full flex-col gap-2 sm:flex-row sm:items-stretch" (submit)="$event.preventDefault(); submit()">
+        <input
+          pInputText
+          type="email"
+          name="newsletter-email"
+          autocomplete="email"
+          placeholder="votre@courriel.ca"
+          class="ce-newsletter__input w-full min-w-0 flex-1"
+          [ngModel]="email()"
+          (ngModelChange)="email.set($event); feedback.set('idle')"
+        />
+        <p-button type="submit" label="S’abonner" icon="pi pi-send" styleClass="ce-newsletter__submit w-full shrink-0 sm:w-auto" />
+      </form>
+    </div>
+  } @else {
+    <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-8">
+      <div class="flex min-w-0 flex-1 gap-3">
+        <div class="ce-newsletter__icon hidden h-12 w-12 shrink-0 items-center justify-center rounded-xl sm:flex" aria-hidden="true">
+          <i class="pi pi-envelope text-xl"></i>
+        </div>
+        <div class="min-w-0 flex-1">
+          <h2 class="font-display m-0 text-lg font-bold sm:text-xl">Infolettre du Camp Ectus</h2>
+          <p class="mt-1 m-0 max-w-xl text-sm leading-relaxed opacity-90">
+            Recevez les dates d’inscription, les nouvelles du camp et les appels de bénévoles (démo : aucun courriel n’est
+            envoyé).
+          </p>
+        </div>
+      </div>
+      <form
+        class="flex w-full flex-col gap-2 sm:max-w-md sm:flex-row sm:items-stretch lg:w-auto lg:min-w-[20rem]"
+        (submit)="$event.preventDefault(); submit()"
+      >
+        <input
+          pInputText
+          type="email"
+          name="newsletter-email"
+          autocomplete="email"
+          placeholder="votre@courriel.ca"
+          class="ce-newsletter__input w-full min-w-0 flex-1"
+          [ngModel]="email()"
+          (ngModelChange)="email.set($event); feedback.set('idle')"
+        />
+        <p-button type="submit" label="S’abonner" icon="pi pi-send" styleClass="ce-newsletter__submit w-full shrink-0 sm:w-auto" />
+      </form>
+    </div>
+  }
+  @if (feedback() === 'ok') {
+    <p-message
+      severity="success"
+      styleClass="mt-3 w-full"
+      [closable]="true"
+      text="Merci ! En production, vous recevriez un courriel de confirmation (double opt-in)."
+      (onClose)="feedback.set('idle')"
+    />
+  }
+  @if (feedback() === 'err') {
+    <p-message
+      severity="error"
+      styleClass="mt-3 w-full"
+      [closable]="true"
+      text="Entrez une adresse courriel valide."
+      (onClose)="feedback.set('idle')"
+    />
+  }
+</div>

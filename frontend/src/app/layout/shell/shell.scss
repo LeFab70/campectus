@@ -1,0 +1,80 @@
+:host ::ng-deep .ce-menubar.p-menubar {
+  padding: 0;
+}
+
+:host ::ng-deep .ce-menubar .p-menubar-root-list {
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+/* Même vert océan au survol et pour la page courante (lien actif) */
+:host ::ng-deep .ce-menubar .p-menubar-item-link {
+  border-radius: 0.5rem;
+  color: var(--ce-ocean, #0f766e);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+:host ::ng-deep .ce-menubar .p-menubar-item-link:hover {
+  background-color: color-mix(in srgb, var(--ce-ocean, #0d9488) 14%, transparent);
+  color: var(--ce-ocean, #0f766e);
+}
+
+:host ::ng-deep .ce-menubar .p-menubar-item-link:focus-visible {
+  outline: 2px solid var(--ce-ocean, #0d9488);
+  outline-offset: 2px;
+}
+
+:host ::ng-deep .ce-menubar .p-menubar-item-link.p-menubar-item-link-active,
+:host ::ng-deep .ce-menubar .p-menubar-item-link.router-link-active {
+  background-color: var(--ce-ocean, #0d9488);
+  color: #fff;
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--ce-ocean) 40%, transparent);
+}
+
+:host ::ng-deep .ce-menubar .p-menubar-item-link.p-menubar-item-link-active:hover,
+:host ::ng-deep .ce-menubar .p-menubar-item-link.router-link-active:hover {
+  background-color: color-mix(in srgb, var(--ce-ocean, #0d9488) 92%, #000);
+  color: #fff;
+}
+
+.ce-shell-donate {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  color: #0f172a;
+  background: linear-gradient(135deg, var(--ce-sun, #fbbf24), #f59e0b);
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.35);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.ce-shell-donate:hover {
+  color: #0f172a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.45);
+}
+
+.ce-shell-donate:focus-visible {
+  outline: 2px solid var(--ce-ocean, #0d9488);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ce-shell-donate {
+    transition: none;
+  }
+
+  .ce-shell-donate:hover {
+    transform: none;
+  }
+}

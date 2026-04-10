@@ -1,0 +1,1444 @@
+<div class="ce-simple-root pb-16">
+  @if (content(); as c) {
+    @if (showHero()) {
+      <section
+        class="ce-page-hero relative overflow-hidden bg-gradient-to-br from-teal-900 via-teal-800 to-[var(--ce-forest)] text-white"
+      >
+        <div
+          class="pointer-events-none absolute -right-16 top-0 h-64 w-64 rounded-full bg-[var(--ce-sun)]/20 blur-3xl"
+          aria-hidden="true"
+        ></div>
+        <div
+          class="pointer-events-none absolute -left-10 bottom-0 h-48 w-48 rounded-full bg-[var(--ce-sky)]/25 blur-3xl"
+          aria-hidden="true"
+        ></div>
+        <div class="relative mx-auto max-w-6xl px-4 pb-16 pt-10 md:pb-20 md:pt-14">
+          <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+            <div>
+              <p-tag
+                [value]="heroBadge(c.key)"
+                severity="warn"
+                styleClass="!border-white/30 !bg-white/15 !text-white"
+              />
+              <h1 class="font-display mt-4 text-3xl font-bold leading-tight tracking-tight md:text-4xl lg:text-5xl">
+                {{ c.title }}
+              </h1>
+              <div class="ce-title-accent ce-title-accent--on-dark mt-5" aria-hidden="true"></div>
+              <p class="mt-4 max-w-xl text-base leading-relaxed text-white/90 md:text-lg">{{ c.intro }}</p>
+            </div>
+            <figure class="ce-page-hero__figure m-0">
+              <div
+                class="relative aspect-[4/3] min-h-[14rem] w-full overflow-hidden rounded-[var(--ce-radius-xl)] border border-white/25 shadow-xl"
+              >
+                <img
+                  [src]="c.heroImageUrl"
+                  [alt]="c.heroImageAlt"
+                  width="1800"
+                  height="1000"
+                  loading="lazy"
+                  decoding="async"
+                  referrerpolicy="no-referrer"
+                  class="ce-page-hero__img h-full w-full object-cover"
+                />
+                <div
+                  class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-black/25"
+                  aria-hidden="true"
+                ></div>
+                <figcaption
+                  class="absolute inset-x-0 bottom-0 px-4 pb-4 pt-12 text-center text-white"
+                  style="background: linear-gradient(to top, rgba(0, 0, 0, 0.65), transparent)"
+                >
+                  <p class="m-0 flex items-center justify-center gap-2 text-sm font-semibold tracking-wide">
+                    <i class="pi pi-image text-[var(--ce-sun-soft)]" aria-hidden="true"></i>
+                    Zone image / média
+                  </p>
+                  <p class="mt-1.5 m-0 text-xs leading-snug text-white/85">
+                    Emplacement pour une photo du camp, une illustration ou une bannière fournie par l’équipe (CMS à
+                    venir).
+                  </p>
+                </figcaption>
+              </div>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <div class="relative z-10 mx-auto max-w-6xl px-4">
+        <div
+          class="ce-page-body -mt-10 rounded-[var(--ce-radius-xl)] border border-teal-900/10 bg-[var(--ce-card)] px-4 py-10 shadow-[var(--ce-shadow-soft)] md:-mt-14 md:px-8 md:py-12"
+        >
+          <p-tag value="Données de démo" severity="secondary" styleClass="mb-6" />
+
+          @switch (c.key) {
+            @case ('information') {
+              <div class="space-y-10" ceRevealScroll>
+                <div class="grid gap-6 lg:grid-cols-3">
+                  <div class="space-y-6 lg:col-span-2">
+                    @for (s of c.sections; track s.heading) {
+                      <p-card styleClass="ce-info-section-card overflow-hidden shadow-[var(--ce-shadow-soft)]">
+                        <div class="flex flex-col gap-5 lg:flex-row lg:items-stretch">
+                          <div class="min-w-0 flex-1">
+                            <div class="mb-4 flex items-start gap-3 border-b border-teal-900/10 pb-3">
+                              <div
+                                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-teal-700/10 text-lg text-teal-800"
+                                aria-hidden="true"
+                              >
+                                <i [class]="s.icon"></i>
+                              </div>
+                              <h3 class="font-display m-0 pt-1.5 text-lg font-semibold text-[var(--ce-ocean)]">
+                                {{ s.heading }}
+                              </h3>
+                            </div>
+                            @for (para of s.paragraphs; track $index) {
+                              <p class="m-0 text-[var(--ce-text-muted)] leading-relaxed" [class.mt-3]="$index > 0">
+                                {{ para }}
+                              </p>
+                            }
+                          </div>
+                          <div class="ce-info-section-visual shrink-0 lg:w-[min(100%,20rem)] xl:w-[22rem]">
+                            <div
+                              class="overflow-hidden rounded-[var(--ce-radius-lg)] border border-teal-900/10 bg-teal-50/40 shadow-sm"
+                            >
+                              <img
+                                [src]="s.imageUrl"
+                                [alt]="s.imageAlt"
+                                width="800"
+                                height="520"
+                                loading="lazy"
+                                decoding="async"
+                                referrerpolicy="no-referrer"
+                                class="aspect-[16/10] h-auto w-full object-cover"
+                              />
+                            </div>
+                            <div class="mt-2 space-y-1 text-center text-xs lg:text-left">
+                              <p class="m-0 font-semibold text-teal-900/85">Zone image / média</p>
+                              <p class="m-0 leading-snug text-[var(--ce-text-muted)]">
+                                Emplacement pour une photo du camp, une illustration ou une bannière fournie par l’équipe
+                                (CMS à venir).
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </p-card>
+                    }
+                  </div>
+                  <div class="space-y-6 lg:min-w-0">
+                    <p-card header="Nous joindre" styleClass="shadow-[var(--ce-shadow-soft)] border-teal-900/15">
+                      <p class="m-0 text-sm text-[var(--ce-text-muted)] leading-relaxed">
+                        Coordonnées complètes, horaires (démo) et formulaire : tout est sur la page Contact.
+                      </p>
+                      <a
+                        routerLink="/contact"
+                        class="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-teal-700 px-4 py-3 text-sm font-semibold text-white no-underline shadow-sm transition hover:bg-teal-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
+                      >
+                        <i class="pi pi-envelope" aria-hidden="true"></i>
+                        Contactez-nous
+                      </a>
+                    </p-card>
+                    <p-fieldset legend="En bref" styleClass="border-teal-900/15">
+                      <ul class="m-0 list-none space-y-3 p-0">
+                        @for (f of c.facts; track f.label) {
+                          <li class="flex gap-3 border-b border-teal-900/10 pb-3 last:border-0 last:pb-0">
+                            <div
+                              class="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-50 text-teal-800"
+                              aria-hidden="true"
+                            >
+                              <i [class]="f.icon"></i>
+                            </div>
+                            <div class="min-w-0">
+                              <span class="text-xs font-semibold uppercase tracking-wide text-teal-800/70">{{ f.label }}</span>
+                              <p class="m-0 mt-1 font-medium text-[var(--ce-text)]">{{ f.value }}</p>
+                            </div>
+                          </li>
+                        }
+                      </ul>
+                    </p-fieldset>
+                  </div>
+                </div>
+
+                <section
+                  class="rounded-[var(--ce-radius-xl)] border border-teal-900/12 bg-gradient-to-b from-teal-50/50 to-[var(--ce-card)] p-5 shadow-[var(--ce-shadow-soft)] sm:p-6 md:p-8"
+                  aria-labelledby="ce-info-newsletter-heading"
+                >
+                  <div class="mb-6 text-center md:text-left">
+                    <p-tag value="Infolettre" severity="secondary" styleClass="mb-2" />
+                    <h2 id="ce-info-newsletter-heading" class="font-display m-0 text-2xl font-bold text-[var(--ce-ocean)]">
+                      Nouvelles du camp & abonnement
+                    </h2>
+                    <p class="mx-auto mt-2 m-0 max-w-3xl text-sm text-[var(--ce-text-muted)] md:mx-0">
+                      Quelques exemples de contenus que vos infolettres pourraient mettre en avant. Les textes et photos
+                      seront éditables en administration.
+                    </p>
+                  </div>
+
+                  <div class="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    @for (item of c.newsletterPreviews; track item.id) {
+                      <article
+                        class="flex flex-col overflow-hidden rounded-[var(--ce-radius-lg)] border border-teal-900/10 bg-[var(--ce-card)] shadow-sm transition hover:border-teal-600/25 hover:shadow-md"
+                      >
+                        <div class="aspect-[16/10] overflow-hidden bg-teal-900/5">
+                          <img
+                            [src]="item.imageUrl"
+                            [alt]="'Visuel d’accompagnement : ' + item.title"
+                            width="600"
+                            height="380"
+                            loading="lazy"
+                            decoding="async"
+                            referrerpolicy="no-referrer"
+                            class="h-full w-full object-cover"
+                          />
+                        </div>
+                        <div class="flex flex-1 flex-col p-4">
+                          <time class="text-xs font-semibold uppercase tracking-wide text-teal-800/70">{{ item.dateLabel }}</time>
+                          <h3 class="font-display mt-2 m-0 text-base font-semibold text-[var(--ce-ocean)]">
+                            {{ item.title }}
+                          </h3>
+                          <p class="mt-2 m-0 flex-1 text-sm leading-relaxed text-[var(--ce-text-muted)]">
+                            {{ item.excerpt }}
+                          </p>
+                        </div>
+                      </article>
+                    }
+                  </div>
+
+                  <app-newsletter-signup variant="light" layout="stacked" />
+                </section>
+              </div>
+            }
+            @case ('contact') {
+              <div class="mx-auto max-w-2xl" ceRevealScroll>
+                <app-contact-us />
+              </div>
+            }
+            @case ('inscription') {
+              <div
+                class="grid gap-8 xl:grid-cols-[minmax(0,1fr)_min(100%,19rem)] xl:items-start"
+                ceRevealScroll
+              >
+                <div class="min-w-0 space-y-8">
+              <p-card header="Sessions 2026" styleClass="shadow-[var(--ce-shadow-soft)]">
+                <div class="grid gap-4 md:grid-cols-2">
+                  @for (sess of c.sessions; track sess.id) {
+                    @if (sess.sessionGroupTitle) {
+                      <div class="col-span-full">
+                        <h3
+                          class="font-display m-0 border-b border-teal-900/15 pb-2 text-base font-semibold text-[var(--ce-ocean)]"
+                        >
+                          {{ sess.sessionGroupTitle }}
+                        </h3>
+                      </div>
+                    }
+                    <div
+                      class="rounded-[var(--ce-radius-lg)] border border-teal-900/10 bg-[var(--ce-surface)] p-5 transition hover:border-teal-600/35 hover:shadow-md"
+                    >
+                      <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+                        <div class="order-2 min-w-0 flex-1 text-center sm:order-1 sm:text-left">
+                          <div class="flex items-start justify-between gap-2">
+                            <h3 class="font-display m-0 text-lg font-semibold text-[var(--ce-ocean)]">{{ sess.name }}</h3>
+                            <i
+                              class="pi pi-info-circle shrink-0 cursor-help text-teal-600/80"
+                              pTooltip="Choisissez la session correspondant à la cohorte de naissance de votre enfant. Les places sont indicatives (démo)."
+                              tooltipPosition="left"
+                            ></i>
+                          </div>
+                          @if (sess.durationLabel) {
+                            <p class="mt-1 text-sm font-medium text-teal-800/90">{{ sess.durationLabel }}</p>
+                          }
+                          <p class="mt-2 text-sm text-[var(--ce-text-muted)]">{{ sess.dates }}</p>
+                          <p class="mt-2 flex flex-wrap items-center justify-center gap-2 text-sm sm:justify-start">
+                            <span
+                              class="inline-flex items-center gap-1.5 rounded-full bg-teal-50 px-2.5 py-1 font-medium text-[var(--ce-text)] ring-1 ring-teal-800/10"
+                            >
+                              <i [class]="sess.ageIcon + ' text-teal-700'" aria-hidden="true"></i>
+                              {{ sess.ageRange }}
+                            </span>
+                          </p>
+                          <div class="mt-3 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
+                            <p-tag
+                              [value]="sess.spotsLeft + ' places / ' + sess.spotsTotal"
+                              [severity]="sess.spotsLeft < 8 ? 'warn' : 'success'"
+                            />
+                            <span class="text-sm font-semibold text-teal-800">{{ formatCad(sess.feeCad) }}</span>
+                          </div>
+                          <p-button
+                            label="Pré-inscription"
+                            icon="pi pi-pencil"
+                            styleClass="mt-4 w-full"
+                            (onClick)="openInscriptionWizard(sess)"
+                          />
+                        </div>
+                        <div class="order-1 flex justify-center sm:order-2 sm:shrink-0 sm:self-center">
+                          <div
+                            class="ce-session-photo-ring h-28 w-28 overflow-hidden rounded-full border-4 border-white shadow-md ring-2 ring-teal-800/15 sm:h-32 sm:w-32 md:h-[8.5rem] md:w-[8.5rem]"
+                          >
+                            <img
+                              [src]="sess.imageUrl"
+                              [alt]="'Illustration décorative — ' + sess.name"
+                              width="400"
+                              height="400"
+                              loading="lazy"
+                              decoding="async"
+                              referrerpolicy="no-referrer"
+                              class="h-full w-full object-cover"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                </div>
+              </p-card>
+
+              <p-card header="Activités" styleClass="shadow-[var(--ce-shadow-soft)]">
+                <p class="m-0 text-[var(--ce-text-muted)] leading-relaxed">{{ c.activites }}</p>
+              </p-card>
+
+              <p-card header="Location du site" styleClass="shadow-[var(--ce-shadow-soft)]">
+                <p class="m-0 text-[var(--ce-text-muted)] leading-relaxed">{{ c.locationIntro }}</p>
+                <ul class="mt-3 m-0 list-disc space-y-1 pl-5 text-[var(--ce-text-muted)]">
+                  @for (b of c.locationBullets; track b) {
+                    <li>{{ b }}</li>
+                  }
+                </ul>
+              </p-card>
+
+              <div class="grid gap-6 md:grid-cols-2">
+                <p-card header="Étapes" styleClass="h-full shadow-[var(--ce-shadow-soft)]">
+                  <ol class="m-0 list-decimal space-y-2 pl-5 text-[var(--ce-text-muted)]">
+                    @for (step of c.steps; track $index) {
+                      <li class="leading-relaxed">{{ step }}</li>
+                    }
+                  </ol>
+                </p-card>
+                <p-card header="Documents (exemple)" styleClass="h-full shadow-[var(--ce-shadow-soft)]">
+                  <ul class="m-0 list-disc space-y-2 pl-5 text-[var(--ce-text-muted)]">
+                    @for (doc of c.documentsNeeded; track doc) {
+                      <li>{{ doc }}</li>
+                    }
+                  </ul>
+                  <p-divider />
+                  <p class="m-0 text-sm text-[var(--ce-text)]">{{ c.contactBlurb }}</p>
+                </p-card>
+              </div>
+                </div>
+
+                <aside
+                  class="space-y-6 border-t border-teal-900/10 pt-8 xl:sticky xl:top-24 xl:border-l xl:border-t-0 xl:border-teal-900/10 xl:pl-8 xl:pt-0"
+                  aria-label="À propos du camp et des sessions"
+                >
+                  <p-card
+                    [header]="c.publicCibleQuestion"
+                    styleClass="shadow-[var(--ce-shadow-soft)] border-teal-800/10"
+                  >
+                    <p class="m-0 text-sm text-[var(--ce-text-muted)] leading-relaxed">{{ c.publicCibleAnswer }}</p>
+                  </p-card>
+                  <p-card header="Site et locaux" styleClass="shadow-[var(--ce-shadow-soft)]">
+                    @for (para of c.siteLocauxParagraphs; track $index) {
+                      <p class="m-0 text-sm text-[var(--ce-text-muted)] leading-relaxed" [class.mt-3]="$index > 0">
+                        {{ para }}
+                      </p>
+                    }
+                  </p-card>
+                  <p-card header="Objectifs" styleClass="shadow-[var(--ce-shadow-soft)] overflow-hidden">
+                    <ul
+                      class="m-0 max-h-[min(32rem,65vh)] list-disc space-y-2 overflow-y-auto pl-4 text-sm text-[var(--ce-text-muted)] leading-relaxed xl:pl-5"
+                    >
+                      @for (obj of c.objectifs; track $index) {
+                        <li>{{ obj }}</li>
+                      }
+                    </ul>
+                  </p-card>
+                </aside>
+              </div>
+            }
+            @case ('emploi') {
+              <div class="space-y-6" ceRevealScroll>
+                @for (job of c.postings; track job.id) {
+                  <p-card styleClass="overflow-hidden shadow-[var(--ce-shadow-soft)]">
+                    <div
+                      class="flex flex-col gap-4 border-b border-teal-900/10 bg-gradient-to-r from-teal-50 to-[var(--ce-sand)]/80 px-4 py-5 md:flex-row md:items-center md:justify-between"
+                    >
+                      <div class="flex min-w-0 flex-1 flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">
+                        <div class="flex justify-center sm:justify-start">
+                          <div
+                            class="ce-job-photo-ring h-24 w-24 shrink-0 overflow-hidden rounded-full border-4 border-white shadow-md ring-2 ring-teal-800/15 sm:h-28 sm:w-28"
+                          >
+                            <img
+                              [src]="job.imageUrl"
+                              [alt]="'Illustration — ' + job.title"
+                              width="400"
+                              height="400"
+                              loading="lazy"
+                              decoding="async"
+                              referrerpolicy="no-referrer"
+                              class="h-full w-full object-cover"
+                            />
+                          </div>
+                        </div>
+                        <div class="min-w-0 flex-1 text-center sm:text-left">
+                          <h2 class="font-display m-0 flex flex-wrap items-center justify-center gap-2 text-xl font-bold text-[var(--ce-ocean)] sm:justify-start md:text-2xl">
+                            <i [class]="job.icon + ' text-teal-700'" aria-hidden="true"></i>
+                            <span>{{ job.title }}</span>
+                          </h2>
+                          <p class="m-0 mt-1 text-sm text-[var(--ce-text-muted)]">{{ job.location }} · {{ job.type }}</p>
+                        </div>
+                      </div>
+                      <div class="flex flex-wrap items-center justify-center gap-2 md:justify-end">
+                        @for (t of job.tags; track t) {
+                          <p-chip [label]="t" />
+                        }
+                        <i
+                          class="pi pi-info-circle cursor-help text-teal-700"
+                          pTooltip="Poste affiché à titre de démonstration. La candidature complète se fait via le formulaire."
+                          tooltipPosition="left"
+                        ></i>
+                      </div>
+                    </div>
+                    <p class="m-0 px-1 pt-5 text-[var(--ce-text-muted)] leading-relaxed">{{ job.excerpt }}</p>
+                    <div class="mt-4 flex flex-wrap gap-4 px-1 text-sm text-[var(--ce-text-muted)]">
+                      <span><i class="pi pi-calendar mr-1 text-teal-700" aria-hidden="true"></i>Publié {{ job.postedAt }}</span>
+                      <span><i class="pi pi-flag mr-1 text-teal-700" aria-hidden="true"></i>Date limite {{ job.deadline }}</span>
+                      <span><i class="pi pi-wallet mr-1 text-teal-700" aria-hidden="true"></i>{{ job.salaryHint }}</span>
+                    </div>
+                    <div class="mt-6 flex flex-wrap justify-end gap-2 border-t border-teal-900/10 px-1 pt-4">
+                      <p-button label="Postuler" icon="pi pi-send" (onClick)="openEmploiWizard(job)" />
+                      <p-button label="Partager" icon="pi pi-share-alt" severity="secondary" [outlined]="true" [disabled]="true" />
+                    </div>
+                  </p-card>
+                }
+              </div>
+            }
+            @case ('financement') {
+              <div
+                id="ce-finance-bars"
+                ceRevealScroll
+                (revealed)="onFinanceStatsRevealed()"
+                class="space-y-8"
+              >
+                <div
+                  id="ce-donate-hero"
+                  class="relative overflow-hidden rounded-[var(--ce-radius-xl)] border-2 border-[var(--ce-sun)]/45 bg-gradient-to-br from-amber-50 via-teal-50/90 to-teal-100/80 p-6 shadow-[var(--ce-shadow-soft)] md:p-8"
+                >
+                  <div
+                    class="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-[var(--ce-sun)]/25 blur-2xl"
+                    aria-hidden="true"
+                  ></div>
+                  <div class="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+                    <div class="max-w-2xl">
+                      <p-tag value="Priorité campagne" severity="warn" styleClass="!font-semibold" />
+                      <h2 class="font-display m-0 mt-3 text-2xl font-bold text-[var(--ce-ocean)] md:text-3xl">
+                        Soutenez le Camp Ectus — chaque dollar compte
+                      </h2>
+                      <p class="m-0 mt-3 text-sm leading-relaxed text-[var(--ce-text-muted)] md:text-base">
+                        Bourses, entretien des sites, activités pour les jeunes : votre don (simulation ici) permet de
+                        concrétiser la mission du camp. Prenez 2 minutes pour compléter le formulaire guidé.
+                      </p>
+                    </div>
+                    <div class="flex w-full flex-col gap-2 sm:max-w-xs lg:w-auto lg:min-w-[14rem]">
+                      <p-button
+                        label="Faire un don maintenant"
+                        icon="pi pi-heart-fill"
+                        severity="warn"
+                        styleClass="w-full !font-semibold !py-3"
+                        (onClick)="openDonationWizard()"
+                      />
+                      <p class="m-0 text-center text-xs text-[var(--ce-text-muted)]">
+                        Paiement carte ou sur place · démo sans prélèvement réel
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex flex-col gap-6 lg:flex-row lg:items-stretch">
+                  <p-card styleClass="flex-1 shadow-[var(--ce-shadow-soft)]">
+                    <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                      <div>
+                        <div class="flex items-center gap-2">
+                          <p class="m-0 text-sm font-medium uppercase tracking-wide text-teal-800/80">
+                            Progression (montants fictifs)
+                          </p>
+                          <i
+                            class="pi pi-info-circle cursor-help text-teal-700"
+                            pTooltip="La barre s’anime lorsque cette section entre à l’écran. Données reliées au backend plus tard."
+                            tooltipPosition="top"
+                          ></i>
+                        </div>
+                        <p class="font-display m-0 mt-1 text-3xl font-bold text-[var(--ce-ocean)]">
+                          {{ formatCad(c.raisedCad) }}
+                          <span class="text-lg font-normal text-[var(--ce-text-muted)]">
+                            / objectif {{ formatCad(c.goalCad) }}</span>
+                        </p>
+                      </div>
+                      <p-tag [value]="animatedMainPercent() + ' %'" severity="success" />
+                    </div>
+                    <p-progressBar [value]="animatedMainPercent()" styleClass="ce-progress-animated mt-4 h-3" />
+                  </p-card>
+                  <p-card
+                    header="Encore une façon de donner"
+                    styleClass="flex-1 border-2 border-teal-700/20 bg-gradient-to-br from-teal-50 to-amber-50/60 shadow-[var(--ce-shadow-soft)]"
+                  >
+                    <p class="m-0 text-sm text-[var(--ce-text-muted)] leading-relaxed">
+                      Le formulaire en plusieurs étapes est le même que ci-dessus : montant, vos coordonnées, mode de
+                      paiement et récapitulatif.
+                    </p>
+                    <p-button
+                      label="Ouvrir le formulaire de don"
+                      icon="pi pi-heart-fill"
+                      severity="warn"
+                      styleClass="mt-4 w-full !font-semibold"
+                      (onClick)="openDonationWizard()"
+                    />
+                  </p-card>
+                </div>
+                <div class="mb-2 grid gap-4 md:grid-cols-2">
+                  @for (obj of c.objectives; track obj.title; let i = $index) {
+                    <div [style.--ce-reveal-delay.ms]="80 + i * 90" ceRevealScroll>
+                      <p-card [header]="obj.title" styleClass="h-full shadow-[var(--ce-shadow-soft)]">
+                        <p class="m-0 text-[var(--ce-text-muted)] leading-relaxed">{{ obj.description }}</p>
+                      </p-card>
+                    </div>
+                  }
+                </div>
+                <p-card header="Sources de revenus (exemple)" styleClass="shadow-[var(--ce-shadow-soft)]">
+                  <div class="space-y-4">
+                    @for (src of c.revenueSources; track src.label; let ri = $index) {
+                      <div>
+                        <div class="mb-1 flex justify-between text-sm">
+                          <span class="font-medium text-[var(--ce-text)]">{{ src.label }}</span>
+                          <span class="text-[var(--ce-text-muted)]">{{ revenueAnimatedPercent(ri) }} %</span>
+                        </div>
+                        <p-progressBar
+                          [value]="revenueAnimatedPercent(ri)"
+                          styleClass="ce-progress-animated h-2"
+                        />
+                        <p class="m-0 mt-1 text-xs text-[var(--ce-text-muted)]">{{ src.detail }}</p>
+                      </div>
+                    }
+                  </div>
+                  <p-divider />
+                  <p class="m-0 text-sm text-[var(--ce-text-muted)]">{{ c.donorNote }}</p>
+                </p-card>
+
+                <div
+                  class="flex flex-col items-center gap-3 rounded-[var(--ce-radius-xl)] border border-teal-800/20 bg-gradient-to-r from-teal-50 to-amber-50/70 px-5 py-8 text-center shadow-[var(--ce-shadow-soft)]"
+                >
+                  <p class="m-0 text-base font-semibold text-[var(--ce-ocean)]">Vous souhaitez contribuer ?</p>
+                  <p class="m-0 max-w-lg text-sm text-[var(--ce-text-muted)]">
+                    Ouvrez le formulaire de don : choix du montant, coordonnées et mode de paiement (démonstration).
+                  </p>
+                  <p-button
+                    label="Faire un don"
+                    icon="pi pi-heart-fill"
+                    severity="warn"
+                    styleClass="!font-semibold"
+                    (onClick)="openDonationWizard()"
+                  />
+                </div>
+              </div>
+            }
+          }
+        </div>
+      </div>
+    }
+  } @else {
+    <div class="mx-auto max-w-3xl px-4 py-14">
+      <p-card header="Page introuvable">
+        <p class="m-0 text-[var(--ce-text-muted)]">Contenu de démo non défini pour cette adresse.</p>
+      </p-card>
+    </div>
+  }
+</div>
+
+<p-dialog
+  [visible]="wizardOpen()"
+  (visibleChange)="onWizardVisibleChange($event)"
+  [modal]="true"
+  [closable]="true"
+  [draggable]="false"
+  [dismissableMask]="true"
+  [style]="{ width: 'min(100vw - 1.5rem, 44rem)' }"
+  [breakpoints]="{ '576px': '98vw' }"
+  [header]="wizardTitle()"
+  styleClass="ce-wizard-dialog"
+>
+  @if (wizardDone()) {
+    @if (wizardKind() === 'donation') {
+      <p-message severity="success" styleClass="w-full"> Merci pour votre geste — don enregistré en démonstration. </p-message>
+      <p class="mt-4 text-sm text-[var(--ce-text-muted)] leading-relaxed">
+        Aucun montant n’a été prélevé. En production, le don passerait par un processeur de paiement conforme PCI et un reçu
+        serait envoyé à {{ donorEmail() }}.
+      </p>
+    } @else {
+      <p-message severity="success" styleClass="w-full">
+        Demande enregistrée (démonstration — aucune donnée n’est envoyée au serveur).
+      </p-message>
+      <p class="mt-4 text-sm text-[var(--ce-text-muted)] leading-relaxed">
+        Vous recevriez normalement un courriel de confirmation. Cette étape sera branchée sur Spring Boot et PostgreSQL.
+      </p>
+    }
+    <div class="mt-6 flex justify-end">
+      <p-button label="Fermer" icon="pi pi-check" (onClick)="onWizardVisibleChange(false)" />
+    </div>
+  } @else {
+    <p-progressBar [value]="wizardProgress()" styleClass="mb-6 h-2" />
+
+    <div class="mb-6 flex flex-wrap justify-center gap-2 sm:gap-3">
+      @for (label of wizardStepLabelsActive(); track $index) {
+        <div
+          class="flex min-w-[3.75rem] flex-col items-center gap-1 transition-opacity sm:min-w-[4.5rem]"
+          [class.opacity-45]="wizardStep() !== $index"
+        >
+          <span
+            class="flex h-9 w-9 items-center justify-center rounded-full border-2 text-xs font-bold transition-colors sm:h-10 sm:w-10 sm:text-sm"
+            [class.border-teal-800]="wizardStep() >= $index"
+            [class.bg-teal-700]="wizardStep() === $index"
+            [class.text-white]="wizardStep() === $index"
+            [class.text-teal-900]="wizardStep() !== $index"
+            [class.bg-teal-50]="wizardStep() > $index"
+          >
+            {{ $index + 1 }}
+          </span>
+          <span
+            class="max-w-[5.5rem] text-center text-[0.6rem] font-medium uppercase leading-tight tracking-wide text-[var(--ce-text-muted)] sm:max-w-[6rem] sm:text-xs"
+          >
+            {{ label }}
+          </span>
+        </div>
+      }
+    </div>
+
+    @if (wizardError(); as err) {
+      <p-message severity="error" styleClass="mb-4 w-full">{{ err }}</p-message>
+    }
+
+    @if (wizardKind() === 'inscription' && selectedSession(); as sess) {
+      @switch (wizardStep()) {
+        @case (0) {
+          <div class="rounded-lg border border-teal-900/15 bg-teal-50/50 p-4">
+            <div class="flex items-start justify-between gap-2">
+              <h3 class="font-display m-0 text-lg text-[var(--ce-ocean)]">{{ sess.name }}</h3>
+              <i
+                class="pi pi-info-circle shrink-0 cursor-help text-teal-700"
+                pTooltip="Vérifiez les dates et le groupe d’âge avant de continuer."
+                tooltipPosition="left"
+              ></i>
+            </div>
+            <p class="mt-2 text-sm text-[var(--ce-text-muted)]">
+              @if (sess.durationLabel) {
+                <span>{{ sess.durationLabel }} · </span>
+              }
+              {{ sess.dates }} · {{ sess.ageRange }}
+            </p>
+            <p class="mt-2 text-sm">
+              <strong>{{ formatCad(sess.feeCad) }}</strong>
+              — {{ sess.spotsLeft }} places restantes sur {{ sess.spotsTotal }}.
+            </p>
+            <p class="mt-3 text-sm text-[var(--ce-text-muted)]">Confirmez cette session pour passer à l’étape suivante.</p>
+          </div>
+        }
+        @case (1) {
+          <div class="flex flex-col gap-4">
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div class="flex flex-col gap-2">
+                <span class="flex items-center gap-1 text-sm font-medium">
+                  Prénom du parent / tuteur
+                  <i
+                    class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                    pTooltip="Personne responsable légalement de l’enfant pendant le séjour."
+                    tooltipPosition="top"
+                  ></i>
+                </span>
+                <input
+                  pInputText
+                  id="wiz-p-prenom"
+                  class="w-full"
+                  autocomplete="given-name"
+                  [ngModel]="parentPrenom()"
+                  (ngModelChange)="parentPrenom.set($event)"
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <span class="flex items-center gap-1 text-sm font-medium">
+                  Nom
+                  <i
+                    class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                    pTooltip="Nom de famille tel qu’indiqué sur les documents officiels."
+                    tooltipPosition="top"
+                  ></i>
+                </span>
+                <input
+                  pInputText
+                  id="wiz-p-nom"
+                  class="w-full"
+                  autocomplete="family-name"
+                  [ngModel]="parentNom()"
+                  (ngModelChange)="parentNom.set($event)"
+                />
+              </div>
+            </div>
+            <div class="flex flex-col gap-2">
+              <span class="flex items-center gap-1 text-sm font-medium">
+                Courriel
+                <i
+                  class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                  pTooltip="Utilisé pour la confirmation d’inscription et les messages importants."
+                  tooltipPosition="top"
+                ></i>
+              </span>
+              <p-iconfield>
+                <p-inputicon class="pi pi-envelope"></p-inputicon>
+                <input
+                  pInputText
+                  id="wiz-p-email"
+                  type="email"
+                  class="w-full"
+                  autocomplete="email"
+                  [ngModel]="parentEmail()"
+                  (ngModelChange)="parentEmail.set($event)"
+                />
+              </p-iconfield>
+            </div>
+            <div class="flex flex-col gap-2">
+              <span class="flex items-center gap-1 text-sm font-medium">
+                Téléphone (optionnel)
+                <i
+                  class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                  pTooltip="Utile pour vous joindre rapidement en cas d’urgence pendant le camp."
+                  tooltipPosition="top"
+                ></i>
+              </span>
+              <p-iconfield>
+                <p-inputicon class="pi pi-phone"></p-inputicon>
+                <input
+                  pInputText
+                  id="wiz-p-tel"
+                  type="tel"
+                  class="w-full"
+                  autocomplete="tel"
+                  [ngModel]="parentPhone()"
+                  (ngModelChange)="parentPhone.set($event)"
+                />
+              </p-iconfield>
+            </div>
+          </div>
+        }
+        @case (2) {
+          <div class="flex flex-col gap-4">
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div class="flex flex-col gap-2">
+                <span class="flex items-center gap-1 text-sm font-medium">
+                  Prénom de l’enfant
+                  <i
+                    class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                    pTooltip="Tel qu’il sera utilisé sur le badge et les listes du camp."
+                    tooltipPosition="top"
+                  ></i>
+                </span>
+                <input
+                  pInputText
+                  id="wiz-c-prenom"
+                  class="w-full"
+                  [ngModel]="childPrenom()"
+                  (ngModelChange)="childPrenom.set($event)"
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <label for="wiz-c-nom" class="text-sm font-medium">Nom</label>
+                <input
+                  pInputText
+                  id="wiz-c-nom"
+                  class="w-full"
+                  [ngModel]="childNom()"
+                  (ngModelChange)="childNom.set($event)"
+                />
+              </div>
+            </div>
+            <div class="flex flex-col gap-2">
+              <span class="flex items-center gap-1 text-sm font-medium">
+                Date de naissance
+                <i
+                  class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                  pTooltip="Permet de valider l’admissibilité à la tranche d’âge de la session."
+                  tooltipPosition="top"
+                ></i>
+              </span>
+              <p-iconfield>
+                <p-inputicon class="pi pi-calendar"></p-inputicon>
+                <input
+                  pInputText
+                  id="wiz-c-dob"
+                  type="date"
+                  class="w-full"
+                  [ngModel]="childDob()"
+                  (ngModelChange)="childDob.set($event)"
+                />
+              </p-iconfield>
+            </div>
+          </div>
+        }
+        @case (3) {
+          @if (content(); as inc) {
+            @if (inc.key === 'inscription') {
+              <p class="m-0 text-sm text-[var(--ce-text-muted)]">
+                Cochez chaque document que vous pourrez fournir
+                <i
+                  class="pi pi-info-circle ml-1 cursor-help text-teal-600"
+                  pTooltip="Ces cases confirment votre capacité à produire les pièces avant le début du camp."
+                  tooltipPosition="top"
+                ></i>
+                :
+              </p>
+              <div class="mt-4 flex flex-col gap-3">
+                @for (doc of inc.documentsNeeded; track doc; let i = $index) {
+                  <div class="flex items-start gap-3">
+                    <p-checkbox
+                      [inputId]="'wiz-doc-' + i"
+                      [binary]="true"
+                      [ngModel]="docAck()[doc]"
+                      (ngModelChange)="setDocAck(doc, $event)"
+                    />
+                    <label [for]="'wiz-doc-' + i" class="cursor-pointer text-sm leading-snug text-[var(--ce-text)]">{{
+                      doc
+                    }}</label>
+                  </div>
+                }
+              </div>
+            }
+          }
+        }
+        @case (4) {
+          <div class="flex flex-col gap-4">
+            <p-message severity="warn" styleClass="w-full">
+              <span class="text-sm"
+                >Interface de démonstration uniquement. N’entrez jamais de véritables données de carte bancaire ici.</span
+              >
+            </p-message>
+            <div>
+              <span class="mb-2 flex items-center gap-2 text-sm font-medium">
+                Mode de paiement
+                <i
+                  class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                  pTooltip="Carte : simulation de paiement sécurisé. Sur place : vous réglerez au secrétariat du camp."
+                  tooltipPosition="top"
+                ></i>
+              </span>
+              <p-selectButton
+                [options]="paymentOptions"
+                optionLabel="label"
+                optionValue="value"
+                [allowEmpty]="false"
+                [ngModel]="paymentMode()"
+                (ngModelChange)="paymentMode.set($event)"
+                styleClass="flex flex-wrap"
+              />
+            </div>
+            @if (paymentMode() === 'presentiel') {
+              <div class="rounded-lg border border-teal-800/20 bg-teal-50/80 p-4 text-sm text-[var(--ce-text-muted)]">
+                <p class="m-0 flex items-start gap-2">
+                  <i class="pi pi-building-columns mt-0.5 text-teal-800" aria-hidden="true"></i>
+                  <span
+                    >Vous pourrez payer en personne au camp ou selon les modalités communiquées par courriel. Aucune carte
+                    n’est demandée.</span
+                  >
+                </p>
+              </div>
+            }
+            @if (paymentMode() === 'carte') {
+              <div class="flex flex-col gap-4">
+                <div class="flex items-center justify-center gap-3 rounded-lg border border-teal-900/10 bg-[var(--ce-surface)] py-3 text-2xl text-teal-800/80">
+                  <i class="pi pi-credit-card" aria-hidden="true" pTooltip="Paiement sécurisé (simulation)" tooltipPosition="bottom"></i>
+                  <i class="pi pi-wallet" aria-hidden="true" pTooltip="Portefeuille numérique (futur)" tooltipPosition="bottom"></i>
+                  <i class="pi pi-lock" aria-hidden="true" pTooltip="Chiffrement TLS côté serveur (production)" tooltipPosition="bottom"></i>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <span class="flex items-center gap-1 text-sm font-medium">
+                    Nom sur la carte
+                    <i
+                      class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                      pTooltip="Identique à l’impression au recto de la carte."
+                      tooltipPosition="top"
+                    ></i>
+                  </span>
+                  <p-iconfield>
+                    <p-inputicon class="pi pi-user"></p-inputicon>
+                    <input
+                      pInputText
+                      id="wiz-card-name"
+                      class="w-full"
+                      autocomplete="cc-name"
+                      placeholder="Comme sur la carte"
+                      [ngModel]="cardHolderName()"
+                      (ngModelChange)="cardHolderName.set($event)"
+                    />
+                  </p-iconfield>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <span class="flex items-center gap-1 text-sm font-medium">
+                    Numéro de carte
+                    <i
+                      class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                      pTooltip="16 chiffres en général. Démo : utilisez des chiffres fictifs uniquement."
+                      tooltipPosition="top"
+                    ></i>
+                  </span>
+                  <p-iconfield iconPosition="left">
+                    <p-inputicon class="pi pi-credit-card"></p-inputicon>
+                    <input
+                      pInputText
+                      id="wiz-card-num"
+                      class="w-full"
+                      inputmode="numeric"
+                      autocomplete="cc-number"
+                      placeholder="0000 0000 0000 0000"
+                      [ngModel]="cardNumber()"
+                      (ngModelChange)="onCardNumberInput($event)"
+                    />
+                  </p-iconfield>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="flex flex-col gap-2">
+                    <span class="flex items-center gap-1 text-sm font-medium">
+                      Expiration
+                      <i
+                        class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                        pTooltip="Mois / année (2 chiffres), comme au dos ou face avant."
+                        tooltipPosition="top"
+                      ></i>
+                    </span>
+                    <p-iconfield>
+                      <p-inputicon class="pi pi-calendar"></p-inputicon>
+                      <input
+                        pInputText
+                        id="wiz-card-exp"
+                        class="w-full"
+                        inputmode="numeric"
+                        autocomplete="cc-exp"
+                        placeholder="MM/AA"
+                        [ngModel]="cardExpiry()"
+                        (ngModelChange)="onExpiryInput($event)"
+                      />
+                    </p-iconfield>
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <span class="flex items-center gap-1 text-sm font-medium">
+                      CVC
+                      <i
+                        class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                        pTooltip="3 ou 4 chiffres au dos de la carte (sécurité)."
+                        tooltipPosition="top"
+                      ></i>
+                    </span>
+                    <p-iconfield>
+                      <p-inputicon class="pi pi-shield"></p-inputicon>
+                      <input
+                        pInputText
+                        id="wiz-card-cvc"
+                        class="w-full"
+                        inputmode="numeric"
+                        autocomplete="cc-csc"
+                        placeholder="•••"
+                        [ngModel]="cardCvc()"
+                        (ngModelChange)="onCvcInput($event)"
+                      />
+                    </p-iconfield>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        }
+        @case (5) {
+          <div class="space-y-3 text-sm">
+            <p class="m-0 font-semibold text-[var(--ce-ocean)]">Récapitulatif</p>
+            <ul class="m-0 list-none space-y-2 p-0 text-[var(--ce-text-muted)]">
+              <li><strong>Session :</strong> {{ sess.name }}</li>
+              <li>
+                <strong>Parent :</strong> {{ parentPrenom() }} {{ parentNom() }} — {{ parentEmail() }}
+                @if (parentPhone().trim()) {
+                  <span> — {{ parentPhone() }}</span>
+                }
+              </li>
+              <li><strong>Enfant :</strong> {{ childPrenom() }} {{ childNom() }}, né(e) le {{ childDob() }}</li>
+              <li>
+                <strong>Paiement :</strong> {{ paymentSummary() }}
+              </li>
+            </ul>
+            <p class="m-0 text-xs text-[var(--ce-text-muted)]">
+              En soumettant, vous acceptez que ces données soient traitées conformément à la politique du camp (texte à
+              fournir).
+            </p>
+          </div>
+        }
+      }
+    }
+
+    @if (wizardKind() === 'emploi' && selectedJob(); as job) {
+      @switch (wizardStep()) {
+        @case (0) {
+          <div class="rounded-lg border border-teal-900/15 bg-teal-50/50 p-4">
+            <h3 class="font-display m-0 text-lg text-[var(--ce-ocean)]">{{ job.title }}</h3>
+            <p class="mt-2 text-sm text-[var(--ce-text-muted)]">{{ job.location }} · {{ job.type }}</p>
+            <p class="mt-3 text-sm leading-relaxed text-[var(--ce-text-muted)]">{{ job.excerpt }}</p>
+            <p class="mt-2 text-xs text-[var(--ce-text-muted)]">Date limite : {{ job.deadline }}</p>
+          </div>
+        }
+        @case (1) {
+          <div class="flex flex-col gap-4">
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div class="flex flex-col gap-2">
+                <span class="flex items-center gap-1 text-sm font-medium">
+                  Prénom
+                  <i
+                    class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                    pTooltip="Prénom légal pour le contrat ou la fiche employé."
+                    tooltipPosition="top"
+                  ></i>
+                </span>
+                <input
+                  pInputText
+                  id="wiz-e-prenom"
+                  class="w-full"
+                  [ngModel]="candPrenom()"
+                  (ngModelChange)="candPrenom.set($event)"
+                />
+              </div>
+              <div class="flex flex-col gap-2">
+                <label for="wiz-e-nom" class="text-sm font-medium">Nom</label>
+                <input
+                  pInputText
+                  id="wiz-e-nom"
+                  class="w-full"
+                  [ngModel]="candNom()"
+                  (ngModelChange)="candNom.set($event)"
+                />
+              </div>
+            </div>
+            <div class="flex flex-col gap-2">
+              <span class="flex items-center gap-1 text-sm font-medium">
+                Courriel
+                <i
+                  class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                  pTooltip="Pour vous envoyer la suite du processus de recrutement."
+                  tooltipPosition="top"
+                ></i>
+              </span>
+              <p-iconfield>
+                <p-inputicon class="pi pi-envelope"></p-inputicon>
+                <input
+                  pInputText
+                  id="wiz-e-email"
+                  type="email"
+                  class="w-full"
+                  [ngModel]="candEmail()"
+                  (ngModelChange)="candEmail.set($event)"
+                />
+              </p-iconfield>
+            </div>
+            <div class="flex flex-col gap-2">
+              <span class="flex items-center gap-1 text-sm font-medium">
+                Téléphone
+                <i
+                  class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                  pTooltip="Minimum 10 chiffres (format nord-américain typique)."
+                  tooltipPosition="top"
+                ></i>
+              </span>
+              <p-iconfield>
+                <p-inputicon class="pi pi-phone"></p-inputicon>
+                <input
+                  pInputText
+                  id="wiz-e-tel"
+                  type="tel"
+                  class="w-full"
+                  [ngModel]="candPhone()"
+                  (ngModelChange)="candPhone.set($event)"
+                />
+              </p-iconfield>
+            </div>
+          </div>
+        }
+        @case (2) {
+          <div class="flex flex-col gap-2">
+            <span class="flex items-center gap-1 text-sm font-medium">
+              Expérience et disponibilités
+              <i
+                class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                pTooltip="Stages, camps, certifications (RCR, sauvetage, etc.) et semaines où vous êtes disponible."
+                tooltipPosition="top"
+              ></i>
+            </span>
+            <textarea
+              pTextarea
+              id="wiz-e-exp"
+              rows="6"
+              class="w-full"
+              placeholder="Décrivez votre expérience auprès des jeunes, vos certifications, vos semaines disponibles… (au moins 20 caractères)"
+              [ngModel]="candExperience()"
+              (ngModelChange)="candExperience.set($event)"
+            ></textarea>
+            <p class="m-0 text-xs text-[var(--ce-text-muted)]">{{ candExperience().length }} caractères</p>
+          </div>
+        }
+        @case (3) {
+          <div class="flex flex-col gap-2">
+            <span class="flex items-center gap-1 text-sm font-medium">
+              Lettre de motivation (texte)
+              <i
+                class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                pTooltip="Complète le fichier PDF que vous joindrez à l’étape suivante."
+                tooltipPosition="top"
+              ></i>
+            </span>
+            <textarea
+              pTextarea
+              id="wiz-e-msg"
+              rows="5"
+              class="w-full"
+              placeholder="Pourquoi souhaitez-vous rejoindre l’équipe du Camp Ectus ? (au moins 20 caractères)"
+              [ngModel]="candMessage()"
+              (ngModelChange)="candMessage.set($event)"
+            ></textarea>
+            <p class="m-0 text-xs text-[var(--ce-text-muted)]">{{ candMessage().length }} caractères</p>
+          </div>
+        }
+        @case (4) {
+          <div class="flex flex-col gap-4">
+            <p class="m-0 text-sm text-[var(--ce-text-muted)]">
+              Joignez votre CV et une lettre de motivation au format PDF ou Word (démo : sélection locale uniquement).
+              <i
+                class="pi pi-info-circle ml-1 cursor-help text-teal-600"
+                pTooltip="En production, les fichiers seront téléversés vers un stockage sécurisé après validation antivirus."
+                tooltipPosition="top"
+              ></i>
+            </p>
+            <input
+              #cvInp
+              id="wiz-cv-file"
+              type="file"
+              class="hidden"
+              accept=".pdf,.doc,.docx,application/pdf"
+              (change)="onPickCv($event)"
+            />
+            <input
+              #letterInp
+              id="wiz-letter-file"
+              type="file"
+              class="hidden"
+              accept=".pdf,.doc,.docx,application/pdf"
+              (change)="onPickLetter($event)"
+            />
+            <div class="ce-dropzone rounded-[var(--ce-radius-lg)] border-2 border-dashed border-teal-800/25 bg-teal-50/40 p-4">
+              <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <div class="flex items-center gap-2">
+                  <i class="pi pi-file-pdf text-xl text-teal-800" aria-hidden="true"></i>
+                  <div>
+                    <p class="m-0 text-sm font-medium text-[var(--ce-text)]">Curriculum vitae (CV)</p>
+                    <p class="m-0 text-xs text-[var(--ce-text-muted)]">
+                      {{ candCvFile()?.name ?? 'Aucun fichier choisi' }}
+                    </p>
+                  </div>
+                </div>
+                <p-button
+                  label="Parcourir"
+                  icon="pi pi-upload"
+                  severity="secondary"
+                  [outlined]="true"
+                  (onClick)="triggerFileInput('wiz-cv-file')"
+                />
+              </div>
+            </div>
+            <div class="ce-dropzone rounded-[var(--ce-radius-lg)] border-2 border-dashed border-teal-800/25 bg-teal-50/40 p-4">
+              <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <div class="flex items-center gap-2">
+                  <i class="pi pi-file-edit text-xl text-teal-800" aria-hidden="true"></i>
+                  <div>
+                    <p class="m-0 text-sm font-medium text-[var(--ce-text)]">Lettre de motivation (fichier)</p>
+                    <p class="m-0 text-xs text-[var(--ce-text-muted)]">
+                      {{ candLetterFile()?.name ?? 'Aucun fichier choisi' }}
+                    </p>
+                  </div>
+                </div>
+                <p-button
+                  label="Parcourir"
+                  icon="pi pi-upload"
+                  severity="secondary"
+                  [outlined]="true"
+                  (onClick)="triggerFileInput('wiz-letter-file')"
+                />
+              </div>
+            </div>
+          </div>
+        }
+        @case (5) {
+          <div class="space-y-3 text-sm">
+            <p class="m-0 font-semibold text-[var(--ce-ocean)]">Récapitulatif de candidature</p>
+            <ul class="m-0 list-none space-y-2 p-0 text-[var(--ce-text-muted)]">
+              <li><strong>Poste :</strong> {{ job.title }}</li>
+              <li><strong>Candidat·e :</strong> {{ candPrenom() }} {{ candNom() }}</li>
+              <li><strong>Contact :</strong> {{ candEmail() }} · {{ candPhone() }}</li>
+              <li><strong>CV :</strong> {{ candCvFile()?.name ?? '—' }}</li>
+              <li><strong>Lettre (fichier) :</strong> {{ candLetterFile()?.name ?? '—' }}</li>
+            </ul>
+            <p class="m-0 text-sm leading-relaxed text-[var(--ce-text)]"><strong>Expérience :</strong> {{ candExperience() }}</p>
+            <p class="m-0 text-sm leading-relaxed text-[var(--ce-text)]"><strong>Motivation :</strong> {{ candMessage() }}</p>
+          </div>
+        }
+      }
+    }
+
+    @if (wizardKind() === 'donation') {
+      @switch (wizardStep()) {
+        @case (0) {
+          <div class="flex flex-col gap-4">
+            <p class="m-0 text-sm text-[var(--ce-text-muted)]">
+              Choisissez un montant suggéré ou indiquez une somme personnalisée (minimum 5&nbsp;$).
+              <i
+                class="pi pi-info-circle ml-1 cursor-help text-teal-600"
+                pTooltip="Les montants sont fictifs ; en production ils seraient validés côté serveur."
+                tooltipPosition="top"
+              ></i>
+            </p>
+            <div class="flex flex-wrap gap-2">
+              @for (amt of donationPresets; track amt) {
+                <p-button
+                  [label]="formatCad(amt)"
+                  [severity]="donationPresetSelected() === amt ? 'primary' : 'secondary'"
+                  [outlined]="donationPresetSelected() !== amt"
+                  (onClick)="pickDonationPreset(amt)"
+                />
+              }
+            </div>
+            <div class="flex flex-col gap-2">
+              <span class="flex items-center gap-1 text-sm font-medium">
+                Montant personnalisé ($)
+                <i
+                  class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                  pTooltip="Remplace la sélection par montants fixes si vous saisissez une valeur."
+                  tooltipPosition="top"
+                ></i>
+              </span>
+              <p-iconfield>
+                <p-inputicon class="pi pi-dollar"></p-inputicon>
+                <input
+                  pInputText
+                  id="wiz-don-custom"
+                  class="w-full"
+                  inputmode="decimal"
+                  placeholder="ex. 75"
+                  [ngModel]="donationCustom()"
+                  (ngModelChange)="onDonationCustomInput($event)"
+                />
+              </p-iconfield>
+            </div>
+            @if (donationAmountCad(); as da) {
+              <p class="m-0 text-sm font-medium text-teal-800">Montant retenu : {{ formatCad(da) }}</p>
+            }
+          </div>
+        }
+        @case (1) {
+          <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-2">
+              <span class="flex items-center gap-1 text-sm font-medium">
+                Nom complet
+                <i
+                  class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                  pTooltip="Pour le reçu de don et la reconnaissance officielle."
+                  tooltipPosition="top"
+                ></i>
+              </span>
+              <p-iconfield>
+                <p-inputicon class="pi pi-user"></p-inputicon>
+                <input
+                  pInputText
+                  id="wiz-don-name"
+                  class="w-full"
+                  [ngModel]="donorName()"
+                  (ngModelChange)="donorName.set($event)"
+                />
+              </p-iconfield>
+            </div>
+            <div class="flex flex-col gap-2">
+              <span class="flex items-center gap-1 text-sm font-medium">
+                Courriel
+                <i
+                  class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                  pTooltip="Nous vous enverrons la confirmation de don à cette adresse."
+                  tooltipPosition="top"
+                ></i>
+              </span>
+              <p-iconfield>
+                <p-inputicon class="pi pi-envelope"></p-inputicon>
+                <input
+                  pInputText
+                  id="wiz-don-email"
+                  type="email"
+                  class="w-full"
+                  [ngModel]="donorEmail()"
+                  (ngModelChange)="donorEmail.set($event)"
+                />
+              </p-iconfield>
+            </div>
+            <div class="flex flex-col gap-2">
+              <span class="flex items-center gap-1 text-sm font-medium">
+                Message (optionnel)
+                <i
+                  class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                  pTooltip="En mémoire de, en l’honneur de, ou simple mot d’encouragement."
+                  tooltipPosition="top"
+                ></i>
+              </span>
+              <textarea
+                pTextarea
+                id="wiz-don-msg"
+                rows="3"
+                class="w-full"
+                placeholder="Votre message…"
+                [ngModel]="donorMessage()"
+                (ngModelChange)="donorMessage.set($event)"
+              ></textarea>
+            </div>
+          </div>
+        }
+        @case (2) {
+          <div class="flex flex-col gap-4">
+            <p-message severity="warn" styleClass="w-full">
+              <span class="text-sm">Démo uniquement — ne saisissez pas de véritables données bancaires.</span>
+            </p-message>
+            <div>
+              <span class="mb-2 flex items-center gap-2 text-sm font-medium">
+                Mode de paiement
+                <i
+                  class="pi pi-question-circle cursor-help text-teal-600 text-xs"
+                  pTooltip="Carte : simulation. Sur place : promesse de don réglée au camp ou par chèque."
+                  tooltipPosition="top"
+                ></i>
+              </span>
+              <p-selectButton
+                [options]="paymentOptions"
+                optionLabel="label"
+                optionValue="value"
+                [allowEmpty]="false"
+                [ngModel]="paymentMode()"
+                (ngModelChange)="paymentMode.set($event)"
+                styleClass="flex flex-wrap"
+              />
+            </div>
+            @if (paymentMode() === 'presentiel') {
+              <div class="rounded-lg border border-teal-800/20 bg-teal-50/80 p-4 text-sm text-[var(--ce-text-muted)]">
+                <p class="m-0 flex items-start gap-2">
+                  <i class="pi pi-building-columns mt-0.5 text-teal-800" aria-hidden="true"></i>
+                  <span
+                    >Vous pourrez finaliser votre don en personne ou par chèque selon les consignes du Camp Ectus. Aucune
+                    carte saisie.</span
+                  >
+                </p>
+              </div>
+            }
+            @if (paymentMode() === 'carte') {
+              <div class="flex flex-col gap-4">
+                <div class="flex items-center justify-center gap-3 rounded-lg border border-teal-900/10 bg-[var(--ce-surface)] py-3 text-2xl text-teal-800/80">
+                  <i class="pi pi-credit-card" aria-hidden="true" pTooltip="Don sécurisé (simulation)" tooltipPosition="bottom"></i>
+                  <i class="pi pi-lock" aria-hidden="true" pTooltip="PCI-DSS via prestataire en production" tooltipPosition="bottom"></i>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <span class="text-sm font-medium">Nom sur la carte</span>
+                  <p-iconfield>
+                    <p-inputicon class="pi pi-user"></p-inputicon>
+                    <input
+                      pInputText
+                      id="wiz-don-card-name"
+                      class="w-full"
+                      autocomplete="cc-name"
+                      placeholder="Comme sur la carte"
+                      [ngModel]="cardHolderName()"
+                      (ngModelChange)="cardHolderName.set($event)"
+                    />
+                  </p-iconfield>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <span class="text-sm font-medium">Numéro de carte</span>
+                  <p-iconfield iconPosition="left">
+                    <p-inputicon class="pi pi-credit-card"></p-inputicon>
+                    <input
+                      pInputText
+                      id="wiz-don-card-num"
+                      class="w-full"
+                      inputmode="numeric"
+                      autocomplete="cc-number"
+                      placeholder="0000 0000 0000 0000"
+                      [ngModel]="cardNumber()"
+                      (ngModelChange)="onCardNumberInput($event)"
+                    />
+                  </p-iconfield>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="flex flex-col gap-2">
+                    <span class="text-sm font-medium">Expiration</span>
+                    <p-iconfield>
+                      <p-inputicon class="pi pi-calendar"></p-inputicon>
+                      <input
+                        pInputText
+                        id="wiz-don-card-exp"
+                        class="w-full"
+                        inputmode="numeric"
+                        autocomplete="cc-exp"
+                        placeholder="MM/AA"
+                        [ngModel]="cardExpiry()"
+                        (ngModelChange)="onExpiryInput($event)"
+                      />
+                    </p-iconfield>
+                  </div>
+                  <div class="flex flex-col gap-2">
+                    <span class="text-sm font-medium">CVC</span>
+                    <p-iconfield>
+                      <p-inputicon class="pi pi-shield"></p-inputicon>
+                      <input
+                        pInputText
+                        id="wiz-don-card-cvc"
+                        class="w-full"
+                        inputmode="numeric"
+                        autocomplete="cc-csc"
+                        placeholder="•••"
+                        [ngModel]="cardCvc()"
+                        (ngModelChange)="onCvcInput($event)"
+                      />
+                    </p-iconfield>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        }
+        @case (3) {
+          <div class="space-y-3 text-sm">
+            <p class="m-0 font-semibold text-[var(--ce-ocean)]">Récapitulatif du don</p>
+            <ul class="m-0 list-none space-y-2 p-0 text-[var(--ce-text-muted)]">
+              <li><strong>Montant :</strong> {{ formatCad(donationAmountCad() ?? 0) }}</li>
+              <li><strong>Donateur :</strong> {{ donorName() }} — {{ donorEmail() }}</li>
+              @if (donorMessage().trim()) {
+                <li><strong>Message :</strong> {{ donorMessage() }}</li>
+              }
+              <li><strong>Paiement :</strong> {{ paymentSummary() }}</li>
+            </ul>
+          </div>
+        }
+      }
+    }
+
+    <div class="mt-8 flex flex-wrap justify-between gap-3 border-t border-teal-900/10 pt-4">
+      <p-button
+        label="Retour"
+        icon="pi pi-arrow-left"
+        severity="secondary"
+        [outlined]="true"
+        [disabled]="wizardStep() === 0"
+        (onClick)="wizardPrev()"
+      />
+      @if (wizardStep() < wizardLastIndex()) {
+        <p-button label="Suivant" icon="pi pi-arrow-right" iconPos="right" (onClick)="wizardNext()" />
+      } @else {
+        <p-button label="Soumettre" icon="pi pi-check" (onClick)="wizardSubmit()" />
+      }
+    </div>
+  }
+</p-dialog>

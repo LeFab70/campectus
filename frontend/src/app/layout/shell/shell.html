@@ -1,0 +1,65 @@
+<div class="ce-shell flex min-h-dvh flex-col">
+  <header
+    class="sticky top-0 z-50 border-b border-teal-900/10 bg-[var(--ce-card)]/90 shadow-[var(--ce-shadow-soft)] backdrop-blur-md"
+  >
+    <div class="mx-auto flex max-w-6xl items-center gap-4 px-4 py-2">
+      <a
+        routerLink="/"
+        class="ce-brand font-display text-xl font-semibold tracking-tight text-[var(--ce-ocean)] no-underline transition-opacity hover:opacity-80"
+      >
+        Camp Ectus
+      </a>
+      <p-menubar [model]="navItems()" styleClass="ce-menubar flex-1 border-0 bg-transparent" />
+      <a
+        routerLink="/financement"
+        [queryParams]="{ don: '1' }"
+        class="ce-shell-donate shrink-0"
+      >
+        <i class="pi pi-heart-fill" aria-hidden="true"></i>
+        <span class="hidden sm:inline">Faire un don</span>
+        <span class="sm:hidden">Don</span>
+      </a>
+      <a
+        routerLink="/admin/login"
+        class="hidden shrink-0 items-center gap-2 rounded-lg border border-teal-700/40 px-3 py-2 text-sm font-medium text-teal-800 no-underline transition hover:bg-teal-50 sm:inline-flex"
+      >
+        <i class="pi pi-lock text-xs" aria-hidden="true"></i>
+        Admin
+      </a>
+    </div>
+  </header>
+
+  <main class="relative flex-1">
+    <router-outlet />
+  </main>
+
+  <footer class="border-t border-teal-900/10 bg-[var(--ce-ocean)] text-white">
+    <div class="mx-auto max-w-6xl px-4 py-10">
+      <app-newsletter-signup variant="dark" />
+      <div class="mt-10 flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <p class="font-display text-lg font-semibold">Camp Ectus inc.</p>
+          <p class="mt-1 text-sm text-white/85">Petit-Rocher, Nouveau-Brunswick</p>
+          <p class="text-sm text-white/85">(506) 783-2894 · campectus&#64;gmail.com</p>
+          <a
+            routerLink="/contact"
+            class="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-[var(--ce-sun-soft)] underline-offset-4 hover:underline"
+          >
+            <i class="pi pi-envelope text-xs" aria-hidden="true"></i>
+            Contactez-nous
+          </a>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a
+            routerLink="/admin/login"
+            class="text-sm text-white/90 underline-offset-4 hover:underline"
+          >
+            Espace administration (stage 2)
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <app-chat-widget />
+</div>

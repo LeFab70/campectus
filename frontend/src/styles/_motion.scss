@@ -1,0 +1,163 @@
+@keyframes ce-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ce-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes ce-stat-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.75rem) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes ce-number-tick {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.65;
+  }
+  40% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes ce-shimmer-line {
+  from {
+    transform: scaleX(0);
+    opacity: 0.5;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+.ce-animate-fade-up {
+  animation: ce-fade-up 0.75s var(--ce-transition) both;
+}
+
+.ce-animate-float {
+  animation: ce-float 5s ease-in-out infinite;
+}
+
+.ce-hero-line {
+  animation: ce-fade-up 0.8s var(--ce-transition) both;
+}
+
+.ce-stat-card {
+  animation: ce-stat-card-in 0.7s var(--ce-transition) both;
+}
+
+.ce-stat-value {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.ce-stat-value--pulse {
+  animation: ce-number-tick 0.45s ease-out;
+}
+
+.ce-highlight-enter {
+  animation: ce-fade-up 0.65s var(--ce-transition) both;
+}
+
+.ce-title-accent {
+  display: block;
+  height: 3px;
+  width: 4rem;
+  margin: 0 auto 1rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--ce-ocean-light), var(--ce-sun));
+  transform-origin: center;
+  animation: ce-shimmer-line 0.9s var(--ce-transition) both;
+}
+
+.ce-delay-1 {
+  animation-delay: 0.1s;
+}
+.ce-delay-2 {
+  animation-delay: 0.2s;
+}
+.ce-delay-3 {
+  animation-delay: 0.3s;
+}
+.ce-delay-4 {
+  animation-delay: 0.4s;
+}
+.ce-delay-5 {
+  animation-delay: 0.5s;
+}
+
+/* Révélation au scroll (directive ceRevealScroll) */
+.ce-reveal {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition:
+    opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: var(--ce-reveal-delay, 0ms);
+}
+
+.ce-reveal.ce-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Barres PrimeNG (page financement) : lissage quand la valeur est animée en JS */
+.ce-progress-animated .p-progressbar-value {
+  transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ce-animate-fade-up,
+  .ce-animate-float,
+  .ce-hero-line,
+  .ce-stat-card,
+  .ce-stat-value--pulse,
+  .ce-highlight-enter,
+  .ce-title-accent {
+    animation: none !important;
+    animation-delay: 0s !important;
+  }
+
+  .ce-stat-card,
+  .ce-hero-line,
+  .ce-highlight-enter {
+    opacity: 1;
+    transform: none;
+  }
+
+  .ce-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .ce-progress-animated .p-progressbar-value {
+    transition: none;
+  }
+}

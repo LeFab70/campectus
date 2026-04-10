@@ -1,0 +1,29 @@
+.ce-newsletter--dark {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.15);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.ce-newsletter--dark .ce-newsletter__icon {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--ce-sun-soft, #fcd34d);
+}
+
+.ce-newsletter--light {
+  border-color: rgba(13, 148, 136, 0.2);
+  background: linear-gradient(135deg, rgba(240, 253, 250, 0.95), rgba(255, 251, 235, 0.5));
+  color: var(--ce-text, #134e4a);
+}
+
+.ce-newsletter--light .ce-newsletter__icon {
+  background: rgba(13, 148, 136, 0.12);
+  color: var(--ce-ocean, #0f766e);
+}
+
+/* Évite le débordement du champ dans les grilles / colonnes étroites */
+:host ::ng-deep .ce-newsletter__input.p-inputtext,
+:host ::ng-deep .ce-newsletter__input {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}

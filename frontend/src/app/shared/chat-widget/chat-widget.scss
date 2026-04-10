@@ -1,0 +1,19 @@
+.ce-chat {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  left: auto;
+  z-index: 1200;
+}
+
+:host ::ng-deep .ce-chat-fab.p-button {
+  width: 3.25rem;
+  height: 3.25rem;
+}
+
+@media (max-width: 639px) {
+  .ce-chat {
+    bottom: 1.25rem;
+    right: 1rem;
+  }
+}

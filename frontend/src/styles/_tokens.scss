@@ -1,0 +1,27 @@
+/**
+ * Design tokens Camp Ectus — modifier ici pour ajuster couleurs / rayons / ombres
+ * (complémentaire au preset PrimeNG dans theme/campectus-preset.ts)
+ */
+:root {
+  --ce-ocean: #0d4f4f;
+  --ce-ocean-light: #1a7a7a;
+  --ce-forest: #1b5e3a;
+  --ce-sand: #f4ede4;
+  --ce-sun: #e8a838;
+  --ce-sun-soft: #f5c76a;
+  --ce-sky: #7eb8c9;
+  --ce-text: #1c2b28;
+  --ce-text-muted: #4a5c57;
+  --ce-surface: #faf8f5;
+  --ce-card: #ffffff;
+  --ce-radius-lg: 1rem;
+  --ce-radius-xl: 1.5rem;
+  --ce-shadow-soft: 0 10px 40px -12px rgb(13 79 79 / 18%);
+  --ce-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --ce-transition: 0.01ms;
+  }
+}

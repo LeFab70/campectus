@@ -1,0 +1,41 @@
+<div class="ce-chat" aria-live="polite">
+  <p-button
+    type="button"
+    icon="pi pi-comments"
+    [rounded]="true"
+    severity="primary"
+    styleClass="ce-chat-fab shadow-lg"
+    [attr.aria-expanded]="open()"
+    [attr.aria-label]="open() ? 'Fermer le chat' : 'Ouvrir le chat virtuel'"
+    (onClick)="toggle()"
+  />
+
+  <p-dialog
+    header="Chat Camp Ectus"
+    [visible]="open()"
+    (visibleChange)="onVisibleChange($event)"
+    [modal]="true"
+    [dismissableMask]="true"
+    [style]="{ width: 'min(100vw - 2rem, 22rem)' }"
+    [breakpoints]="{ '576px': '95vw' }"
+    [draggable]="false"
+    position="bottomright"
+    styleClass="ce-chat-dialog"
+  >
+    <p class="mt-0 text-sm text-[var(--ce-text-muted)]">
+      Assistant virtuel (démo) — connexion WebSocket / IA ou messagerie à brancher sur Spring Boot plus tard.
+    </p>
+    <textarea
+      pTextarea
+      rows="4"
+      class="mt-3 w-full"
+      placeholder="Écrivez votre message…"
+      [value]="draft()"
+      (input)="draft.set($any($event.target).value)"
+    ></textarea>
+    <div class="mt-4 flex justify-end gap-2">
+      <p-button label="Fermer" severity="secondary" [text]="true" (onClick)="onVisibleChange(false)" />
+      <p-button label="Envoyer" icon="pi pi-send" disabled />
+    </div>
+  </p-dialog>
+</div>
