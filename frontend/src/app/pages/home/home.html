@@ -263,10 +263,11 @@
                 @if (p.logoUrl) {
                   <img
                     [src]="p.logoUrl"
-                    [alt]="''"
+                    [alt]="'Logo partenaire — ' + p.name"
                     class="h-full w-full object-cover"
                     loading="lazy"
                     decoding="async"
+                    referrerpolicy="no-referrer"
                   />
                 } @else {
                   <span

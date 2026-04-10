@@ -11,13 +11,22 @@ Refonte du site public inspiré de [Camp Ectus](https://www.campectus.ca/).
 
 ## Frontend
 
+Depuis le dossier **`frontend`** (recommandé) :
+
 ```bash
 cd frontend
 npm install
 npm start
 ```
 
-Puis ouvrir `http://localhost:4200/`.
+Puis ouvrir **`http://127.0.0.1:4200/`** (évite parfois des soucis avec `localhost` / IPv6).
+
+Depuis la **racine du dépôt** `campectus/` :
+
+```bash
+npm run setup
+npm start
+```
 
 ### PostCSS / Tailwind (Angular)
 
@@ -39,7 +48,7 @@ Le CLI Angular ne lit que **`postcss.config.json`** (pas `postcss.config.mjs`). 
 
 ## Déploiement Render (site statique)
 
-Angular **21** exige **Node ≥ 20.19** (voir `engines` dans `frontend/package.json`). Sans la bonne version, le build échoue avec le code de sortie `1`.
+Angular **21** exige **Node ≥ 20.19** côté CLI. Sur Render, définir **`NODE_VERSION`** (ex. `22.12.0`, voir `render.yaml`) si le build échoue avec le code `1`.
 
 | Réglage | Valeur |
 |--------|--------|
@@ -50,7 +59,7 @@ Angular **21** exige **Node ≥ 20.19** (voir `engines` dans `frontend/package.j
 Si la **Root Directory** est vide (racine du repo), utilisez plutôt :  
 **Build** `cd frontend && npm ci && npm run build` et **Publish** `frontend/dist/frontend/browser`.
 
-Variable d’environnement recommandée : `NODE_VERSION` = `22.12.0` (ou un fichier `frontend/.nvmrc` déjà présent).
+Variable d’environnement recommandée : `NODE_VERSION` = `22.12.0` (déjà dans `render.yaml` si vous utilisez le Blueprint).
 
 Réécritures SPA : règle **Rewrite** `/*` → `/index.html` (voir `render.yaml` à la racine du repo).
 
