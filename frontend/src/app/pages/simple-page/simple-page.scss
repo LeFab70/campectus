@@ -32,3 +32,8 @@
   flex-wrap: wrap;
   gap: 0.5rem;
 }
+
+:host ::ng-deep .ce-session-inscription-btn.p-button {
+  width: 100%;
+  min-height: 3rem;
+}

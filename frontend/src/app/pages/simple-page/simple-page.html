@@ -229,10 +229,26 @@
                       </div>
                     }
                     <div
-                      class="rounded-[var(--ce-radius-lg)] border border-teal-900/10 bg-[var(--ce-surface)] p-5 transition hover:border-teal-600/35 hover:shadow-md"
+                      class="flex h-full flex-col gap-4 rounded-[var(--ce-radius-lg)] border border-teal-900/10 bg-[var(--ce-surface)] p-5 transition hover:border-teal-600/35 hover:shadow-md"
                     >
-                      <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-                        <div class="order-2 min-w-0 flex-1 text-center sm:order-1 sm:text-left">
+                      <div class="flex shrink-0 justify-center">
+                        <div
+                          class="ce-session-photo-ring h-32 w-32 overflow-hidden rounded-full border-4 border-white shadow-md ring-2 ring-teal-800/15 md:h-[8.5rem] md:w-[8.5rem]"
+                        >
+                          <img
+                            [src]="sess.imageUrl"
+                            [alt]="'Illustration décorative — ' + sess.name"
+                            width="400"
+                            height="400"
+                            loading="lazy"
+                            decoding="async"
+                            referrerpolicy="no-referrer"
+                            class="h-full w-full object-cover"
+                          />
+                        </div>
+                      </div>
+                      <div class="flex min-h-0 min-w-0 flex-1 flex-col text-center sm:text-left">
+                        <div class="min-w-0 shrink-0">
                           <div class="flex items-start justify-between gap-2">
                             <h3 class="font-display m-0 text-lg font-semibold text-[var(--ce-ocean)]">{{ sess.name }}</h3>
                             <i
@@ -244,7 +260,7 @@
                           @if (sess.durationLabel) {
                             <p class="mt-1 text-sm font-medium text-teal-800/90">{{ sess.durationLabel }}</p>
                           }
-                          <p class="mt-2 text-sm text-[var(--ce-text-muted)]">{{ sess.dates }}</p>
+                          <p class="mt-2 text-sm leading-relaxed text-[var(--ce-text-muted)]">{{ sess.dates }}</p>
                           <p class="mt-2 flex flex-wrap items-center justify-center gap-2 text-sm sm:justify-start">
                             <span
                               class="inline-flex items-center gap-1.5 rounded-full bg-teal-50 px-2.5 py-1 font-medium text-[var(--ce-text)] ring-1 ring-teal-800/10"
@@ -260,28 +276,14 @@
                             />
                             <span class="text-sm font-semibold text-teal-800">{{ formatCad(sess.feeCad) }}</span>
                           </div>
+                        </div>
+                        <div class="mt-auto w-full shrink-0 border-t border-teal-900/10 pt-5">
                           <p-button
                             label="Pré-inscription"
                             icon="pi pi-pencil"
-                            styleClass="mt-4 w-full"
+                            styleClass="ce-session-inscription-btn w-full !py-3.5 !text-base !font-semibold"
                             (onClick)="openInscriptionWizard(sess)"
                           />
-                        </div>
-                        <div class="order-1 flex justify-center sm:order-2 sm:shrink-0 sm:self-center">
-                          <div
-                            class="ce-session-photo-ring h-28 w-28 overflow-hidden rounded-full border-4 border-white shadow-md ring-2 ring-teal-800/15 sm:h-32 sm:w-32 md:h-[8.5rem] md:w-[8.5rem]"
-                          >
-                            <img
-                              [src]="sess.imageUrl"
-                              [alt]="'Illustration décorative — ' + sess.name"
-                              width="400"
-                              height="400"
-                              loading="lazy"
-                              decoding="async"
-                              referrerpolicy="no-referrer"
-                              class="h-full w-full object-cover"
-                            />
-                          </div>
                         </div>
                       </div>
                     </div>

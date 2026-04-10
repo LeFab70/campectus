@@ -16,9 +16,9 @@ export class ShellComponent {
   readonly navItems = signal<MenuItem[]>([
     { label: 'Accueil', routerLink: '/', routerLinkActiveOptions: { exact: true } },
     { label: 'Information', routerLink: '/information' },
-    { label: 'Contact', routerLink: '/contact' },
     { label: 'Inscription', routerLink: '/inscription' },
     { label: 'Emploi', routerLink: '/emploi' },
     { label: 'Campagne de financement', routerLink: '/financement' },
+    { label: 'Contact', routerLink: '/contact' },
   ]);
 }
